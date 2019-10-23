@@ -1,9 +1,8 @@
 <map id="DrivingChassis.h" name="DrivingChassis.h">
-<area shape="rect" id="node1" title=" " alt="" coords="131,5,249,32"/>
-<area shape="rect" id="node2" href="$DrivingChassis_8cpp.html" title=" " alt="" coords="49,80,181,107"/>
-<area shape="rect" id="node3" href="$StudentsRobot_8h.html" title=" " alt="" coords="205,80,324,107"/>
-<area shape="rect" id="node4" href="$RobotControlCenter_8h.html" title=" " alt="" coords="94,155,262,181"/>
-<area shape="rect" id="node7" href="$StudentsRobot_8cpp.html" title=" " alt="" coords="286,155,419,181"/>
-<area shape="rect" id="node5" href="$RobotControlCenter_8cpp.html" title=" " alt="" coords="5,229,188,256"/>
-<area shape="rect" id="node6" href="$template_8ino.html" title=" " alt="" coords="213,229,306,256"/>
+<area shape="rect" id="node2" href="$DrivingChassis_8cpp.html" title="DrivingChassis.cpp" alt="" coords="65,80,201,107"/>
+<area shape="rect" id="node3" href="$StudentsRobot_8h.html" title="StudentsRobot.h" alt="" coords="225,80,345,107"/>
+<area shape="rect" id="node4" href="$RobotControlCenter_8h.html" title="src/RobotControlCenter.h" alt="" coords="111,155,282,181"/>
+<area shape="rect" id="node7" href="$StudentsRobot_8cpp.html" title="StudentsRobot.cpp" alt="" coords="307,155,441,181"/>
+<area shape="rect" id="node5" href="$FinalLabCode__2002__Team__04_8ino.html" title="FinalLabCode_2002_Team\l_04.ino" alt="" coords="5,229,183,271"/>
+<area shape="rect" id="node6" href="$RobotControlCenter_8cpp.html" title="src/RobotControlCenter.cpp" alt="" coords="207,237,392,263"/>
 </map>

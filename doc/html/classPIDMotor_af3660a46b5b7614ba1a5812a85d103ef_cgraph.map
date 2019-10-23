@@ -1,10 +1,9 @@
 <map id="PIDMotor::setOutputUnitVector" name="PIDMotor::setOutputUnitVector">
-<area shape="rect" id="node1" title=" " alt="" coords="5,157,208,184"/>
-<area shape="rect" id="node2" href="$classPIDMotor.html#aeac2d568ea99d5ed87511f6107681919" title=" " alt="" coords="281,5,448,32"/>
-<area shape="rect" id="node3" href="$classPIDMotor.html#a4abe212ce5ed85b3f6f9b0d6065a2d19" title=" " alt="" coords="256,56,473,83"/>
-<area shape="rect" id="node4" href="$classPIDMotor.html#a48ccac9c1c76693f15b54e5db7a33df1" title=" " alt="" coords="283,107,446,133"/>
-<area shape="rect" id="node5" href="$classPIDMotor.html#a7cd2e4d3e82e28e60999eca98a96be7d" title=" " alt="" coords="258,157,471,184"/>
-<area shape="rect" id="node6" href="$classPIDMotor.html#aab8f58c624bc04015c6179e2c029fec3" title=" " alt="" coords="281,208,449,235"/>
-<area shape="rect" id="node7" href="$classPIDMotor.html#a4f30d949a3c41afb995caef9fb207e05" title=" " alt="" coords="297,259,432,285"/>
-<area shape="rect" id="node8" href="$classPIDMotor.html#a017ecfd1aca8cc1e6ac04dafabf8e29e" title=" " alt="" coords="294,309,435,336"/>
+<area shape="rect" id="node2" href="$classPIDMotor.html#aeac2d568ea99d5ed87511f6107681919" title="PIDMotor::getOutputMax" alt="" coords="285,5,453,32"/>
+<area shape="rect" id="node3" href="$classPIDMotor.html#a4abe212ce5ed85b3f6f9b0d6065a2d19" title="PIDMotor::getOutputMaxDeadbad" alt="" coords="259,56,479,83"/>
+<area shape="rect" id="node4" href="$classPIDMotor.html#a48ccac9c1c76693f15b54e5db7a33df1" title="PIDMotor::getOutputMin" alt="" coords="287,107,451,133"/>
+<area shape="rect" id="node5" href="$classPIDMotor.html#a7cd2e4d3e82e28e60999eca98a96be7d" title="PIDMotor::getOutputMinDeadbad" alt="" coords="261,157,477,184"/>
+<area shape="rect" id="node6" href="$classPIDMotor.html#aab8f58c624bc04015c6179e2c029fec3" title="PIDMotor::getOutputStop" alt="" coords="283,208,454,235"/>
+<area shape="rect" id="node7" href="$classPIDMotor.html#a4f30d949a3c41afb995caef9fb207e05" title="PIDMotor::myFmap" alt="" coords="300,259,437,285"/>
+<area shape="rect" id="node8" href="$classPIDMotor.html#a017ecfd1aca8cc1e6ac04dafabf8e29e" title="PIDMotor::setOutput" alt="" coords="297,309,440,336"/>
 </map>

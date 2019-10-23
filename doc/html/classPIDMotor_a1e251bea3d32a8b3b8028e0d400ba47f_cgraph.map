@@ -1,6 +1,5 @@
 <map id="PIDMotor::getVelocityDegreesPerSecond" name="PIDMotor::getVelocityDegreesPerSecond">
-<area shape="rect" id="node1" title=" " alt="" coords="5,23,203,65"/>
-<area shape="rect" id="node2" href="$classPIDMotor.html#a7f73964441f27c0eb1247604dae09bd0" title=" " alt="" coords="251,31,377,57"/>
-<area shape="rect" id="node3" href="$classPIDMotor.html#a804fb78d6d87e55d96d4b798935c8809" title=" " alt="" coords="425,5,575,32"/>
-<area shape="rect" id="node4" href="$classPIDMotor.html#a292e9bc7f736e94ee0df376a08efae33" title=" " alt="" coords="425,56,575,83"/>
+<area shape="rect" id="node2" href="$classPIDMotor.html#a7f73964441f27c0eb1247604dae09bd0" title="PIDMotor::calcVel" alt="" coords="253,31,383,57"/>
+<area shape="rect" id="node3" href="$classPIDMotor.html#a804fb78d6d87e55d96d4b798935c8809" title="PIDMotor::getPosition" alt="" coords="432,5,583,32"/>
+<area shape="rect" id="node4" href="$classPIDMotor.html#a292e9bc7f736e94ee0df376a08efae33" title="PIDMotor::ticksToDeg" alt="" coords="431,56,584,83"/>
 </map>

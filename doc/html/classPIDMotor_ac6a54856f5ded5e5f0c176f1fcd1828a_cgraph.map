@@ -1,5 +1,4 @@
 <map id="PIDMotor::setOutputBoundingValues" name="PIDMotor::setOutputBoundingValues">
-<area shape="rect" id="node1" title=" " alt="" coords="5,35,200,76"/>
-<area shape="rect" id="node2" href="$classPIDMotor.html#a702890e63da27ace0ec16b30d53e0c9e" title=" " alt="" coords="248,5,427,47"/>
-<area shape="rect" id="node3" href="$classPIDMotor.html#a292e9bc7f736e94ee0df376a08efae33" title=" " alt="" coords="263,71,412,98"/>
+<area shape="rect" id="node2" href="$classPIDMotor.html#a702890e63da27ace0ec16b30d53e0c9e" title="PIDMotor::getFreeSpinMax\lDegreesPerSecond" alt="" coords="251,5,432,47"/>
+<area shape="rect" id="node3" href="$classPIDMotor.html#a292e9bc7f736e94ee0df376a08efae33" title="PIDMotor::ticksToDeg" alt="" coords="265,71,418,98"/>
 </map>

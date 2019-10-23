@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['ircamsimplepacketcomsserver_2ecpp',['IRCamSimplePacketComsServer.cpp',['../IRCamSimplePacketComsServer_8cpp.html',1,'']]],
-  ['ircamsimplepacketcomsserver_2eh',['IRCamSimplePacketComsServer.h',['../IRCamSimplePacketComsServer_8h.html',1,'']]]
+  ['hbridgeencoderpidmotor_2ecpp',['HBridgeEncoderPIDMotor.cpp',['../HBridgeEncoderPIDMotor_8cpp.html',1,'']]],
+  ['hbridgeencoderpidmotor_2eh',['HBridgeEncoderPIDMotor.h',['../HBridgeEncoderPIDMotor_8h.html',1,'']]]
 ];

@@ -1,10 +1,8 @@
 <map id="RobotControlCenter" name="RobotControlCenter">
-<area shape="rect" id="node1" title=" " alt="" coords="298,1335,460,1559"/>
-<area shape="rect" id="node2" href="$classPIDMotor.html" title=" " alt="" coords="109,277,324,941"/>
-<area shape="rect" id="node4" href="$classStudentsRobot.html" title=" " alt="" coords="452,1033,613,1243"/>
-<area shape="rect" id="node8" href="$classHBridgeEncoderPIDMotor.html" title=" " alt="" coords="102,1041,331,1235"/>
-<area shape="rect" id="node3" href="$classRBEPID.html" title=" " alt="" coords="144,5,289,200"/>
-<area shape="rect" id="node5" href="$classIRCamSimplePacketComsServer.html" title=" " alt="" coords="539,519,779,699"/>
-<area shape="rect" id="node6" title=" " alt="" coords="474,64,618,141"/>
-<area shape="rect" id="node7" href="$classGetIMU.html" title=" " alt="" coords="350,453,515,765"/>
+<area shape="rect" id="node2" href="$classPIDMotor.html" title="{PIDMotor\n|+ hardwareOutput\l+ targetDegreesPerSecond\l+ mode\l+ unitDuration\l# lastTimeRunPID\l# Setpoint\l# Input\l# Output\l# lastErrPositive\l# curTime\l# prevTime\l# timeInterval\l# movement\l# prevPos\l# Vel\l# startSetpoint\l# endSetpoint\l# startTime\l# duration\l&#45; outputMin\l&#45; outputMax\l&#45; outputMinDeadbad\l&#45; outputMaxDeadbad\l&#45; outputStop\l&#45; myTicksToDeg\l&#45; freeSpinMaxDegreesPerSecond\l&#45; freeSpinMinDegreesPerSecond\l|+ getHardwareOutput()\l+ PIDMotor()\l+ ~PIDMotor()\l+ loop()\l+ velocityLoop()\l+ overrideCurrentPosition()\l+ setSetpoint()\l+ startInterpolation()\l+ isInterpolationDone()\l+ getInterpolationUnitIncrement()\land 22 more...\l# setOutput()\l# calcVel()\l# myFmap()\l# getSetPoint()\l}" alt="" coords="84,277,300,941"/>
+<area shape="rect" id="node4" href="$classStudentsRobot.html" title="{StudentsRobot\n|+ myCommandsStatus\l+ status\l&#45; servo\l&#45; lsensorVal\l&#45; rsensorVal\l&#45; nextTime\l&#45; startTime\l&#45; nextStatus\l|+ StudentsRobot()\l+ pidLoop()\l+ updateStateMachine()\l}" alt="" coords="365,1033,526,1243"/>
+<area shape="rect" id="node9" href="$classHBridgeEncoderPIDMotor.html" title="{HBridgeEncoderPIDMotor\n|+ encoder\l+ motor\l&#45; directionPin\l|+ HBridgeEncoderPIDMotor()\l+ ~HBridgeEncoderPIDMotor()\l+ attach()\l+ getPosition()\l+ setOutput()\l+ overrideCurrentPositionHardware()\l+ calcCur()\l}" alt="" coords="107,1041,342,1235"/>
+<area shape="rect" id="node3" href="$classRBEPID.html" title="{RBEPID\n|+ kp\l+ ki\l+ kd\l+ last_error\l+ sum_error\l+ sampleRateMs\l|+ RBEPID()\l+ setpid()\l+ calc()\l+ clearIntegralBuffer()\l}" alt="" coords="118,5,266,200"/>
+<area shape="rect" id="node5" href="$classIRCamSimplePacketComsServer.html" title="{IRCamSimplePacketComsServer\n|&#45; camera\l&#45; bufferCache\l|+ IRCamSimplePacketComsServer()\l+ ~IRCamSimplePacketComsServer()\l+ event()\l+ loop()\l+ print()\l+ readX()\l+ readY()\l}" alt="" coords="325,519,572,699"/>
+<area shape="rect" id="node7" href="$classGetIMU.html" title="{GetIMU\n|&#45; bno\l&#45; bufferINTERNAL\l&#45; started\l&#45; updateIndex\l&#45; absoluteRotation\l&#45; lastRotation\l&#45; firstRotationRead\l|+ GetIMU()\l+ event()\l+ loop()\l+ startSensor()\l+ print()\l+ getLINEARACCEL_X()\l+ getLINEARACCEL_Y()\l+ getLINEARACCEL_Z()\l+ getGYROSCOPE_X()\l+ getGYROSCOPE_Y()\land 13 more...\l}" alt="" coords="596,453,767,765"/>
 </map>

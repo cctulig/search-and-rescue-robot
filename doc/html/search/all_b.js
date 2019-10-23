@@ -20,6 +20,7 @@ var searchData=
   ['motor3_5fpwm',['MOTOR3_PWM',['../config_8h.html#ac7f7e92837151680913467070302078e',1,'config.h']]],
   ['movement',['movement',['../classPIDMotor.html#aa47150f58fa737aa67ae77533f38ae18',1,'PIDMotor']]],
   ['mycommandsstatus',['myCommandsStatus',['../classStudentsRobot.html#a1fe188b5a6536567701b8285d97ae042',1,'StudentsRobot']]],
+  ['mydfrobotirposition',['myDFRobotIRPosition',['../RobotControlCenter_8cpp.html#a4ec7bdd7e599c9f8d7e579a10ca10e0c',1,'RobotControlCenter.cpp']]],
   ['myfmap',['myFmap',['../classPIDMotor.html#a4f30d949a3c41afb995caef9fb207e05',1,'PIDMotor']]],
   ['myleft',['myleft',['../classDrivingChassis.html#a0b5bd922126e2348f0222922776906fc',1,'DrivingChassis']]],
   ['mypid',['myPID',['../classPIDMotor.html#a0882b047a418b1b4ba6ecd02e07d32bf',1,'PIDMotor']]],

@@ -1,12 +1,11 @@
 <map id="RobotControlCenter::setup" name="RobotControlCenter::setup">
-<area shape="rect" id="node1" title=" " alt="" coords="5,122,140,163"/>
-<area shape="rect" id="node2" href="$classHBridgeEncoderPIDMotor.html#ad971f5e3e4932ac465135018d976defc" title=" " alt="" coords="188,27,359,69"/>
-<area shape="rect" id="node7" href="$classHBridgeEncoderPIDMotor.html#aaf50960b179c4d9b0a059b3b4b41b14d" title=" " alt="" coords="188,93,359,134"/>
-<area shape="rect" id="node8" href="$classPIDMotor.html#a53e76c65cbb75d139eed71cac76d688d" title=" " alt="" coords="198,159,349,185"/>
-<area shape="rect" id="node10" href="$classGetIMU.html#af458fe68b2df51326bfd55a784df05a3" title=" " alt="" coords="203,209,344,236"/>
-<area shape="rect" id="node3" href="$classPIDMotor.html#a32adc7f86caa0f3c97161d945ccc1c5c" title=" " alt="" coords="437,5,556,32"/>
-<area shape="rect" id="node5" href="$classHBridgeEncoderPIDMotor.html#af2b2cfdf8c465b5c9af290cb9a680514" title=" " alt="" coords="411,57,582,98"/>
-<area shape="rect" id="node4" href="$classRBEPID.html#adc6954f2aaa12295fc58ca1dcfca3dc1" title=" " alt="" coords="653,5,834,32"/>
-<area shape="rect" id="node6" href="$classPIDMotor.html#a4abe212ce5ed85b3f6f9b0d6065a2d19" title=" " alt="" coords="635,64,852,91"/>
-<area shape="rect" id="node9" href="$classPIDMotor.html#a0aba3994cd6722646cce3f62a5cc056b" title=" " alt="" coords="407,159,587,185"/>
+<area shape="rect" id="node2" href="$classHBridgeEncoderPIDMotor.html#ad971f5e3e4932ac465135018d976defc" title="HBridgeEncoderPIDMotor\l::attach" alt="" coords="192,27,365,69"/>
+<area shape="rect" id="node7" href="$classHBridgeEncoderPIDMotor.html#aaf50960b179c4d9b0a059b3b4b41b14d" title="HBridgeEncoderPIDMotor\l::getPosition" alt="" coords="192,93,365,134"/>
+<area shape="rect" id="node8" href="$classPIDMotor.html#a53e76c65cbb75d139eed71cac76d688d" title="PIDMotor::setSetpoint" alt="" coords="203,159,355,185"/>
+<area shape="rect" id="node10" href="$classGetIMU.html#af458fe68b2df51326bfd55a784df05a3" title="GetIMU::startSensor" alt="" coords="207,209,350,236"/>
+<area shape="rect" id="node3" href="$classPIDMotor.html#a32adc7f86caa0f3c97161d945ccc1c5c" title="PIDMotor::pidinit" alt="" coords="445,5,565,32"/>
+<area shape="rect" id="node5" href="$classHBridgeEncoderPIDMotor.html#af2b2cfdf8c465b5c9af290cb9a680514" title="HBridgeEncoderPIDMotor\l::setOutput" alt="" coords="418,57,591,98"/>
+<area shape="rect" id="node4" href="$classRBEPID.html#adc6954f2aaa12295fc58ca1dcfca3dc1" title="RBEPID::clearIntegralBuffer" alt="" coords="661,5,847,32"/>
+<area shape="rect" id="node6" href="$classPIDMotor.html#a4abe212ce5ed85b3f6f9b0d6065a2d19" title="PIDMotor::getOutputMaxDeadbad" alt="" coords="644,64,864,91"/>
+<area shape="rect" id="node9" href="$classPIDMotor.html#a0aba3994cd6722646cce3f62a5cc056b" title="PIDMotor::startInterpolation" alt="" coords="413,159,596,185"/>
 </map>

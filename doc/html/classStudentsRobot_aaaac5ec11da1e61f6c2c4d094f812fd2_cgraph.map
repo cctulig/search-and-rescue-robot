@@ -1,10 +1,9 @@
 <map id="StudentsRobot::StudentsRobot" name="StudentsRobot::StudentsRobot">
-<area shape="rect" id="node1" title=" " alt="" coords="5,151,208,178"/>
-<area shape="rect" id="node2" href="$classPIDMotor.html#ac6a54856f5ded5e5f0c176f1fcd1828a" title=" " alt="" coords="256,35,451,76"/>
-<area shape="rect" id="node5" href="$classRBEPID.html#a38127aaf2918707921b3e8e6c27692f5" title=" " alt="" coords="297,101,410,127"/>
-<area shape="rect" id="node6" href="$classGetIMU.html#a7619b8ea17913f59f34396bd75ac8d78" title=" " alt="" coords="280,151,427,178"/>
-<area shape="rect" id="node7" href="$classGetIMU.html#abf702f0faf59cb042fbb0bc743665450" title=" " alt="" coords="279,202,427,229"/>
-<area shape="rect" id="node8" href="$classGetIMU.html#a8012154383088b1f273bdbb56437457c" title=" " alt="" coords="280,253,427,279"/>
-<area shape="rect" id="node3" href="$classPIDMotor.html#a702890e63da27ace0ec16b30d53e0c9e" title=" " alt="" coords="499,5,677,47"/>
-<area shape="rect" id="node4" href="$classPIDMotor.html#a292e9bc7f736e94ee0df376a08efae33" title=" " alt="" coords="513,71,663,98"/>
+<area shape="rect" id="node2" href="$classPIDMotor.html#ac6a54856f5ded5e5f0c176f1fcd1828a" title="PIDMotor::setOutputBounding\lValues" alt="" coords="257,35,455,76"/>
+<area shape="rect" id="node5" href="$classRBEPID.html#a38127aaf2918707921b3e8e6c27692f5" title="RBEPID::setpid" alt="" coords="298,101,414,127"/>
+<area shape="rect" id="node6" href="$classGetIMU.html#a7619b8ea17913f59f34396bd75ac8d78" title="GetIMU::setXPosition" alt="" coords="281,151,431,178"/>
+<area shape="rect" id="node7" href="$classGetIMU.html#abf702f0faf59cb042fbb0bc743665450" title="GetIMU::setYPosition" alt="" coords="281,202,431,229"/>
+<area shape="rect" id="node8" href="$classGetIMU.html#a8012154383088b1f273bdbb56437457c" title="GetIMU::setZPosition" alt="" coords="281,253,431,279"/>
+<area shape="rect" id="node3" href="$classPIDMotor.html#a702890e63da27ace0ec16b30d53e0c9e" title="PIDMotor::getFreeSpinMax\lDegreesPerSecond" alt="" coords="503,5,684,47"/>
+<area shape="rect" id="node4" href="$classPIDMotor.html#a292e9bc7f736e94ee0df376a08efae33" title="PIDMotor::ticksToDeg" alt="" coords="517,71,670,98"/>
 </map>

@@ -10,6 +10,7 @@ var searchData=
   ['filterindex',['filterIndex',['../classServoAnalogPIDMotor.html#ad5aedb5da5fca513288bc2502ffb5b70',1,'ServoAnalogPIDMotor']]],
   ['filtersize',['filterSize',['../ServoAnalogPIDMotor_8h.html#a42f923d939aa47adef20f094493b70a8',1,'ServoAnalogPIDMotor.h']]],
   ['filtersum',['filterSum',['../classServoAnalogPIDMotor.html#a88bb048106694cec6592fa9d6c55e89a',1,'ServoAnalogPIDMotor']]],
+  ['finallabcode_5f2002_5fteam_5f04_2eino',['FinalLabCode_2002_Team_04.ino',['../FinalLabCode__2002__Team__04_8ino.html',1,'']]],
   ['firstrotationread',['firstRotationRead',['../classGetIMU.html#a9b773c62a2eb4d8eebaa0c33a0d051bc',1,'GetIMU']]],
   ['freespinmaxdegreespersecond',['freeSpinMaxDegreesPerSecond',['../classPIDMotor.html#a22cea5bee979882d49c1e9ae179a244e',1,'PIDMotor']]],
   ['freespinmindegreespersecond',['freeSpinMinDegreesPerSecond',['../classPIDMotor.html#aa0d03b375cef1ffe7dba30acc26d6e92',1,'PIDMotor']]]

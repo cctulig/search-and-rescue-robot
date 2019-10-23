@@ -1,6 +1,5 @@
 <map id="HBridgeEncoderPIDMotor::HBridgeEncoderPIDMotor" name="HBridgeEncoderPIDMotor::HBridgeEncoderPIDMotor">
-<area shape="rect" id="node1" title=" " alt="" coords="5,27,184,69"/>
-<area shape="rect" id="node2" href="$classPIDMotor.html#ac6a54856f5ded5e5f0c176f1fcd1828a" title=" " alt="" coords="232,27,427,69"/>
-<area shape="rect" id="node3" href="$classPIDMotor.html#a292e9bc7f736e94ee0df376a08efae33" title=" " alt="" coords="489,5,639,32"/>
-<area shape="rect" id="node4" href="$classPIDMotor.html#a702890e63da27ace0ec16b30d53e0c9e" title=" " alt="" coords="475,57,653,98"/>
+<area shape="rect" id="node2" href="$classPIDMotor.html#ac6a54856f5ded5e5f0c176f1fcd1828a" title="PIDMotor::setOutputBounding\lValues" alt="" coords="235,27,432,69"/>
+<area shape="rect" id="node3" href="$classPIDMotor.html#a292e9bc7f736e94ee0df376a08efae33" title="PIDMotor::ticksToDeg" alt="" coords="494,5,647,32"/>
+<area shape="rect" id="node4" href="$classPIDMotor.html#a702890e63da27ace0ec16b30d53e0c9e" title="PIDMotor::getFreeSpinMax\lDegreesPerSecond" alt="" coords="480,57,661,98"/>
 </map>

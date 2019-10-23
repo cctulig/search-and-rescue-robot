@@ -34,7 +34,7 @@ var searchData=
   ['setsetpointdegrees',['setSetpointDegrees',['../classPIDMotor.html#a707369b2535319b2d2cd7c6c2287926f',1,'PIDMotor']]],
   ['settunings',['SetTunings',['../classPIDMotor.html#a21085deef0fd16f3d8b3668145701a3a',1,'PIDMotor']]],
   ['settuningsvelocity',['SetTuningsVelocity',['../classPIDMotor.html#af5d8c5ccb3fb0e5c1618e0660697cdfe',1,'PIDMotor']]],
-  ['setup',['setup',['../classRobotControlCenter.html#af72cdd5fd97b1c040d4738153b69cb5c',1,'RobotControlCenter::setup()'],['../template_8ino.html#a4fc01d736fe50cf5b977f755b675f11d',1,'setup():&#160;template.ino']]],
+  ['setup',['setup',['../classRobotControlCenter.html#af72cdd5fd97b1c040d4738153b69cb5c',1,'RobotControlCenter::setup()'],['../FinalLabCode__2002__Team__04_8ino.html#a4fc01d736fe50cf5b977f755b675f11d',1,'setup():&#160;FinalLabCode_2002_Team_04.ino']]],
   ['setuppidservers',['setupPIDServers',['../classRobotControlCenter.html#a1b709ab07eb0b1c6501d9d1553f34bc1',1,'RobotControlCenter']]],
   ['setvelocitydegreespersecond',['setVelocityDegreesPerSecond',['../classPIDMotor.html#a7c8326dcf4466f7e2abb0491b0bb80bc',1,'PIDMotor']]],
   ['setxposition',['setXPosition',['../classGetIMU.html#a7619b8ea17913f59f34396bd75ac8d78',1,'GetIMU']]],

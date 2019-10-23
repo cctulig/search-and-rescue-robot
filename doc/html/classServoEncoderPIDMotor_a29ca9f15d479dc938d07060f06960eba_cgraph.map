@@ -1,6 +1,5 @@
 <map id="ServoEncoderPIDMotor::ServoEncoderPIDMotor" name="ServoEncoderPIDMotor::ServoEncoderPIDMotor">
-<area shape="rect" id="node1" title=" " alt="" coords="5,35,169,76"/>
-<area shape="rect" id="node2" href="$classPIDMotor.html#ac6a54856f5ded5e5f0c176f1fcd1828a" title=" " alt="" coords="217,35,412,76"/>
-<area shape="rect" id="node3" href="$classPIDMotor.html#a702890e63da27ace0ec16b30d53e0c9e" title=" " alt="" coords="460,5,639,47"/>
-<area shape="rect" id="node4" href="$classPIDMotor.html#a292e9bc7f736e94ee0df376a08efae33" title=" " alt="" coords="475,71,624,98"/>
+<area shape="rect" id="node2" href="$classPIDMotor.html#ac6a54856f5ded5e5f0c176f1fcd1828a" title="PIDMotor::setOutputBounding\lValues" alt="" coords="221,35,419,76"/>
+<area shape="rect" id="node3" href="$classPIDMotor.html#a702890e63da27ace0ec16b30d53e0c9e" title="PIDMotor::getFreeSpinMax\lDegreesPerSecond" alt="" coords="467,5,648,47"/>
+<area shape="rect" id="node4" href="$classPIDMotor.html#a292e9bc7f736e94ee0df376a08efae33" title="PIDMotor::ticksToDeg" alt="" coords="481,71,634,98"/>
 </map>

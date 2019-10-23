@@ -8,6 +8,7 @@ var searchData=
   ['motor3',['motor3',['../classRobotControlCenter.html#a65742617aadb6b503cd48e4a12790d38',1,'RobotControlCenter::motor3()'],['../classStudentsRobot.html#a2414265708bcaa988abbdea0cb8c4af4',1,'StudentsRobot::motor3()']]],
   ['movement',['movement',['../classPIDMotor.html#aa47150f58fa737aa67ae77533f38ae18',1,'PIDMotor']]],
   ['mycommandsstatus',['myCommandsStatus',['../classStudentsRobot.html#a1fe188b5a6536567701b8285d97ae042',1,'StudentsRobot']]],
+  ['mydfrobotirposition',['myDFRobotIRPosition',['../RobotControlCenter_8cpp.html#a4ec7bdd7e599c9f8d7e579a10ca10e0c',1,'RobotControlCenter.cpp']]],
   ['myleft',['myleft',['../classDrivingChassis.html#a0b5bd922126e2348f0222922776906fc',1,'DrivingChassis']]],
   ['mypid',['myPID',['../classPIDMotor.html#a0882b047a418b1b4ba6ecd02e07d32bf',1,'PIDMotor']]],
   ['myright',['myright',['../classDrivingChassis.html#a696499468d946adf13dc08499727a7d9',1,'DrivingChassis']]],

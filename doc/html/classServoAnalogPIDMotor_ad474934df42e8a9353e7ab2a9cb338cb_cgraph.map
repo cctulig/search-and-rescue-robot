@@ -1,6 +1,5 @@
 <map id="ServoAnalogPIDMotor::ServoAnalogPIDMotor" name="ServoAnalogPIDMotor::ServoAnalogPIDMotor">
-<area shape="rect" id="node1" title=" " alt="" coords="5,35,161,76"/>
-<area shape="rect" id="node2" href="$classPIDMotor.html#ac6a54856f5ded5e5f0c176f1fcd1828a" title=" " alt="" coords="209,35,404,76"/>
-<area shape="rect" id="node3" href="$classPIDMotor.html#a702890e63da27ace0ec16b30d53e0c9e" title=" " alt="" coords="452,5,631,47"/>
-<area shape="rect" id="node4" href="$classPIDMotor.html#a292e9bc7f736e94ee0df376a08efae33" title=" " alt="" coords="467,71,616,98"/>
+<area shape="rect" id="node2" href="$classPIDMotor.html#ac6a54856f5ded5e5f0c176f1fcd1828a" title="PIDMotor::setOutputBounding\lValues" alt="" coords="213,35,411,76"/>
+<area shape="rect" id="node3" href="$classPIDMotor.html#a702890e63da27ace0ec16b30d53e0c9e" title="PIDMotor::getFreeSpinMax\lDegreesPerSecond" alt="" coords="459,5,640,47"/>
+<area shape="rect" id="node4" href="$classPIDMotor.html#a292e9bc7f736e94ee0df376a08efae33" title="PIDMotor::ticksToDeg" alt="" coords="473,71,626,98"/>
 </map>

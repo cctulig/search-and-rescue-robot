@@ -1,7 +1,6 @@
 <map id="StudentsRobot.h" name="StudentsRobot.h">
-<area shape="rect" id="node1" title=" " alt="" coords="205,5,324,32"/>
-<area shape="rect" id="node2" href="$RobotControlCenter_8h.html" title=" " alt="" coords="94,80,262,107"/>
-<area shape="rect" id="node5" href="$StudentsRobot_8cpp.html" title=" " alt="" coords="286,80,419,107"/>
-<area shape="rect" id="node3" href="$RobotControlCenter_8cpp.html" title=" " alt="" coords="5,155,188,181"/>
-<area shape="rect" id="node4" href="$template_8ino.html" title=" " alt="" coords="213,155,306,181"/>
+<area shape="rect" id="node2" href="$RobotControlCenter_8h.html" title="src/RobotControlCenter.h" alt="" coords="111,80,282,107"/>
+<area shape="rect" id="node5" href="$StudentsRobot_8cpp.html" title="StudentsRobot.cpp" alt="" coords="307,80,441,107"/>
+<area shape="rect" id="node3" href="$FinalLabCode__2002__Team__04_8ino.html" title="FinalLabCode_2002_Team\l_04.ino" alt="" coords="5,155,183,196"/>
+<area shape="rect" id="node4" href="$RobotControlCenter_8cpp.html" title="src/RobotControlCenter.cpp" alt="" coords="207,162,392,189"/>
 </map>

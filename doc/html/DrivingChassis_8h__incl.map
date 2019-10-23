@@ -1,13 +1,6 @@
 <map id="DrivingChassis.h" name="DrivingChassis.h">
-<area shape="rect" id="node1" title=" " alt="" coords="487,5,605,32"/>
-<area shape="rect" id="node2" href="$PIDMotor_8h.html" title=" " alt="" coords="137,80,267,107"/>
-<area shape="rect" id="node6" href="$GetIMU_8h.html" title=" " alt="" coords="463,80,629,107"/>
-<area shape="rect" id="node11" href="$config_8h.html" title=" " alt="" coords="654,80,721,107"/>
-<area shape="rect" id="node3" title=" " alt="" coords="5,155,71,181"/>
-<area shape="rect" id="node4" href="$RBEPID_8h.html" title=" " alt="" coords="95,155,200,181"/>
-<area shape="rect" id="node5" title=" " alt="" coords="224,155,287,181"/>
-<area shape="rect" id="node7" title=" " alt="" coords="311,155,459,181"/>
-<area shape="rect" id="node8" title=" " alt="" coords="483,155,609,181"/>
-<area shape="rect" id="node9" title=" " alt="" coords="633,155,766,181"/>
-<area shape="rect" id="node10" title=" " alt="" coords="790,155,915,181"/>
+<area shape="rect" id="node2" href="$PIDMotor_8h.html" title="src/pid/PIDMotor.h" alt="" coords="137,80,269,107"/>
+<area shape="rect" id="node6" href="$GetIMU_8h.html" title="src/commands/GetIMU.h" alt="" coords="467,80,636,107"/>
+<area shape="rect" id="node11" href="$config_8h.html" title="config.h" alt="" coords="660,80,728,107"/>
+<area shape="rect" id="node4" href="$RBEPID_8h.html" title="../../RBEPID.h" alt="" coords="95,155,203,181"/>
 </map>

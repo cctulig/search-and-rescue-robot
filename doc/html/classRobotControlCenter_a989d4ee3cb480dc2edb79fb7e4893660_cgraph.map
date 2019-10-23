@@ -1,30 +1,29 @@
 <map id="RobotControlCenter::fastLoop" name="RobotControlCenter::fastLoop">
-<area shape="rect" id="node1" title=" " alt="" coords="5,272,140,313"/>
-<area shape="rect" id="node2" href="$classStudentsRobot.html#a4ee4b70e8a57bb55e272cf0c78b866d5" title=" " alt="" coords="188,337,349,363"/>
-<area shape="rect" id="node20" href="$classStudentsRobot.html#a67255944c57772b33390dcc786505afe" title=" " alt="" coords="397,173,584,215"/>
-<area shape="rect" id="node3" href="$classPIDMotor.html#ac1374ed36dde94f3a14f8bf78e81c20c" title=" " alt="" coords="437,467,545,494"/>
-<area shape="rect" id="node4" href="$classRBEPID.html#a74256fe09d111f68c97f7fcfaa858960" title=" " alt="" coords="687,493,789,519"/>
-<area shape="rect" id="node5" href="$classPIDMotor.html#a7f73964441f27c0eb1247604dae09bd0" title=" " alt="" coords="675,239,801,266"/>
-<area shape="rect" id="node6" href="$classPIDMotor.html#a804fb78d6d87e55d96d4b798935c8809" title=" " alt="" coords="919,265,1068,291"/>
-<area shape="rect" id="node8" href="$classRBEPID.html#adc6954f2aaa12295fc58ca1dcfca3dc1" title=" " alt="" coords="647,442,829,469"/>
-<area shape="rect" id="node9" href="$classPIDMotor.html#a4b178659f339c95aa78bfb1a9e77c338" title=" " alt="" coords="907,460,1079,501"/>
-<area shape="rect" id="node10" href="$classPIDMotor.html#af3660a46b5b7614ba1a5812a85d103ef" title=" " alt="" coords="892,594,1095,621"/>
-<area shape="rect" id="node18" href="$classPIDMotor.html#af5a516cd4dc617063b61632ce9968df1" title=" " alt="" coords="661,645,815,671"/>
-<area shape="rect" id="node7" href="$classPIDMotor.html#a292e9bc7f736e94ee0df376a08efae33" title=" " alt="" coords="919,71,1068,98"/>
-<area shape="rect" id="node11" href="$classPIDMotor.html#aeac2d568ea99d5ed87511f6107681919" title=" " alt="" coords="1168,391,1335,418"/>
-<area shape="rect" id="node12" href="$classPIDMotor.html#a4abe212ce5ed85b3f6f9b0d6065a2d19" title=" " alt="" coords="1143,442,1360,469"/>
-<area shape="rect" id="node13" href="$classPIDMotor.html#a48ccac9c1c76693f15b54e5db7a33df1" title=" " alt="" coords="1170,493,1333,519"/>
-<area shape="rect" id="node14" href="$classPIDMotor.html#a7cd2e4d3e82e28e60999eca98a96be7d" title=" " alt="" coords="1145,543,1358,570"/>
-<area shape="rect" id="node15" href="$classPIDMotor.html#aab8f58c624bc04015c6179e2c029fec3" title=" " alt="" coords="1167,594,1335,621"/>
-<area shape="rect" id="node16" href="$classPIDMotor.html#a4f30d949a3c41afb995caef9fb207e05" title=" " alt="" coords="1184,695,1319,722"/>
-<area shape="rect" id="node17" href="$classPIDMotor.html#a017ecfd1aca8cc1e6ac04dafabf8e29e" title=" " alt="" coords="1181,645,1322,671"/>
-<area shape="rect" id="node19" href="$classPIDMotor.html#a702890e63da27ace0ec16b30d53e0c9e" title=" " alt="" coords="904,696,1083,737"/>
-<area shape="rect" id="node21" href="$classPIDMotor.html#a59a361f6877ad6dd4504273646e433fd" title=" " alt="" coords="648,5,828,47"/>
-<area shape="rect" id="node23" href="$classPIDMotor.html#a30fafa2f674001af8bf25d771532620b" title=" " alt="" coords="647,71,829,98"/>
-<area shape="rect" id="node24" href="$classGetIMU.html#a758f3c2d0b8968977767d548bdaaf32a" title=" " alt="" coords="689,122,787,149"/>
-<area shape="rect" id="node25" href="$classIRCamSimplePacketComsServer.html#a098879fc4639b7bb2a99ad106da63e13" title=" " alt="" coords="632,173,844,215"/>
-<area shape="rect" id="node26" href="$classPIDMotor.html#ac7a8cb2fcf9c941cedd10864b9463fb7" title=" " alt="" coords="641,391,835,418"/>
-<area shape="rect" id="node27" href="$classPIDMotor.html#ab70676b6d2cea7a85592715056bdb0dd" title=" " alt="" coords="683,341,793,367"/>
-<area shape="rect" id="node22" href="$classPIDMotor.html#a0aba3994cd6722646cce3f62a5cc056b" title=" " alt="" coords="1161,179,1341,206"/>
-<area shape="rect" id="node28" href="$classPIDMotor.html#a53e76c65cbb75d139eed71cac76d688d" title=" " alt="" coords="918,341,1069,367"/>
+<area shape="rect" id="node2" href="$classStudentsRobot.html#a4ee4b70e8a57bb55e272cf0c78b866d5" title="StudentsRobot::pidLoop" alt="" coords="192,337,355,363"/>
+<area shape="rect" id="node20" href="$classStudentsRobot.html#a67255944c57772b33390dcc786505afe" title="StudentsRobot::updateState\lMachine" alt="" coords="403,173,589,215"/>
+<area shape="rect" id="node3" href="$classPIDMotor.html#ac1374ed36dde94f3a14f8bf78e81c20c" title="PIDMotor::loop" alt="" coords="441,467,551,494"/>
+<area shape="rect" id="node4" href="$classRBEPID.html#a74256fe09d111f68c97f7fcfaa858960" title="RBEPID::calc" alt="" coords="694,493,799,519"/>
+<area shape="rect" id="node5" href="$classPIDMotor.html#a7f73964441f27c0eb1247604dae09bd0" title="PIDMotor::calcVel" alt="" coords="682,239,811,266"/>
+<area shape="rect" id="node6" href="$classPIDMotor.html#a804fb78d6d87e55d96d4b798935c8809" title="PIDMotor::getPosition" alt="" coords="931,265,1082,291"/>
+<area shape="rect" id="node8" href="$classRBEPID.html#adc6954f2aaa12295fc58ca1dcfca3dc1" title="RBEPID::clearIntegralBuffer" alt="" coords="653,442,840,469"/>
+<area shape="rect" id="node9" href="$classPIDMotor.html#a4b178659f339c95aa78bfb1a9e77c338" title="PIDMotor::getInterpolation\lUnitIncrement" alt="" coords="919,460,1094,501"/>
+<area shape="rect" id="node10" href="$classPIDMotor.html#af3660a46b5b7614ba1a5812a85d103ef" title="PIDMotor::setOutputUnitVector" alt="" coords="904,594,1109,621"/>
+<area shape="rect" id="node18" href="$classPIDMotor.html#af5a516cd4dc617063b61632ce9968df1" title="PIDMotor::velocityLoop" alt="" coords="667,645,826,671"/>
+<area shape="rect" id="node7" href="$classPIDMotor.html#a292e9bc7f736e94ee0df376a08efae33" title="PIDMotor::ticksToDeg" alt="" coords="930,71,1083,98"/>
+<area shape="rect" id="node11" href="$classPIDMotor.html#aeac2d568ea99d5ed87511f6107681919" title="PIDMotor::getOutputMax" alt="" coords="1183,391,1351,418"/>
+<area shape="rect" id="node12" href="$classPIDMotor.html#a4abe212ce5ed85b3f6f9b0d6065a2d19" title="PIDMotor::getOutputMaxDeadbad" alt="" coords="1157,442,1377,469"/>
+<area shape="rect" id="node13" href="$classPIDMotor.html#a48ccac9c1c76693f15b54e5db7a33df1" title="PIDMotor::getOutputMin" alt="" coords="1185,493,1349,519"/>
+<area shape="rect" id="node14" href="$classPIDMotor.html#a7cd2e4d3e82e28e60999eca98a96be7d" title="PIDMotor::getOutputMinDeadbad" alt="" coords="1159,543,1375,570"/>
+<area shape="rect" id="node15" href="$classPIDMotor.html#aab8f58c624bc04015c6179e2c029fec3" title="PIDMotor::getOutputStop" alt="" coords="1182,594,1353,621"/>
+<area shape="rect" id="node16" href="$classPIDMotor.html#a4f30d949a3c41afb995caef9fb207e05" title="PIDMotor::myFmap" alt="" coords="1199,695,1336,722"/>
+<area shape="rect" id="node17" href="$classPIDMotor.html#a017ecfd1aca8cc1e6ac04dafabf8e29e" title="PIDMotor::setOutput" alt="" coords="1196,645,1339,671"/>
+<area shape="rect" id="node19" href="$classPIDMotor.html#a702890e63da27ace0ec16b30d53e0c9e" title="PIDMotor::getFreeSpinMax\lDegreesPerSecond" alt="" coords="916,696,1097,737"/>
+<area shape="rect" id="node21" href="$classPIDMotor.html#a59a361f6877ad6dd4504273646e433fd" title="PIDMotor::startInterpolation\lDegrees" alt="" coords="655,5,838,47"/>
+<area shape="rect" id="node23" href="$classPIDMotor.html#a30fafa2f674001af8bf25d771532620b" title="PIDMotor::getAngleDegrees" alt="" coords="653,71,840,98"/>
+<area shape="rect" id="node24" href="$classGetIMU.html#a758f3c2d0b8968977767d548bdaaf32a" title="GetIMU::print" alt="" coords="696,122,797,149"/>
+<area shape="rect" id="node25" href="$classIRCamSimplePacketComsServer.html#a098879fc4639b7bb2a99ad106da63e13" title="IRCamSimplePacketComsServer\l::print" alt="" coords="637,173,856,215"/>
+<area shape="rect" id="node26" href="$classPIDMotor.html#ac7a8cb2fcf9c941cedd10864b9463fb7" title="PIDMotor::isInterpolationDone" alt="" coords="647,391,846,418"/>
+<area shape="rect" id="node27" href="$classPIDMotor.html#ab70676b6d2cea7a85592715056bdb0dd" title="PIDMotor::stop" alt="" coords="691,341,802,367"/>
+<area shape="rect" id="node22" href="$classPIDMotor.html#a0aba3994cd6722646cce3f62a5cc056b" title="PIDMotor::startInterpolation" alt="" coords="1176,179,1359,206"/>
+<area shape="rect" id="node28" href="$classPIDMotor.html#a53e76c65cbb75d139eed71cac76d688d" title="PIDMotor::setSetpoint" alt="" coords="931,341,1083,367"/>
 </map>

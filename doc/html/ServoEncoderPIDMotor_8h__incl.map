@@ -1,9 +1,4 @@
 <map id="src/pid/ServoEncoderPIDMotor.h" name="src/pid/ServoEncoderPIDMotor.h">
-<area shape="rect" id="node1" title=" " alt="" coords="163,5,374,32"/>
-<area shape="rect" id="node2" href="$PIDMotor_8h.html" title=" " alt="" coords="104,80,191,107"/>
-<area shape="rect" id="node6" title=" " alt="" coords="215,80,322,107"/>
-<area shape="rect" id="node7" title=" " alt="" coords="346,80,469,107"/>
-<area shape="rect" id="node3" title=" " alt="" coords="5,155,71,181"/>
-<area shape="rect" id="node4" href="$RBEPID_8h.html" title=" " alt="" coords="95,155,200,181"/>
-<area shape="rect" id="node5" title=" " alt="" coords="224,155,287,181"/>
+<area shape="rect" id="node2" href="$PIDMotor_8h.html" title="PIDMotor.h" alt="" coords="104,80,193,107"/>
+<area shape="rect" id="node4" href="$RBEPID_8h.html" title="../../RBEPID.h" alt="" coords="95,155,203,181"/>
 </map>

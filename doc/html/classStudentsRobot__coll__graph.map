@@ -1,8 +1,6 @@
 <map id="StudentsRobot" name="StudentsRobot">
-<area shape="rect" id="node1" title=" " alt="" coords="284,1033,445,1243"/>
-<area shape="rect" id="node2" href="$classPIDMotor.html" title=" " alt="" coords="5,277,220,941"/>
-<area shape="rect" id="node3" href="$classRBEPID.html" title=" " alt="" coords="40,5,185,200"/>
-<area shape="rect" id="node4" href="$classIRCamSimplePacketComsServer.html" title=" " alt="" coords="245,519,485,699"/>
-<area shape="rect" id="node5" title=" " alt="" coords="405,64,549,141"/>
-<area shape="rect" id="node6" href="$classGetIMU.html" title=" " alt="" coords="509,453,674,765"/>
+<area shape="rect" id="node2" href="$classPIDMotor.html" title="{PIDMotor\n|+ hardwareOutput\l+ targetDegreesPerSecond\l+ mode\l+ unitDuration\l# lastTimeRunPID\l# Setpoint\l# Input\l# Output\l# lastErrPositive\l# curTime\l# prevTime\l# timeInterval\l# movement\l# prevPos\l# Vel\l# startSetpoint\l# endSetpoint\l# startTime\l# duration\l&#45; outputMin\l&#45; outputMax\l&#45; outputMinDeadbad\l&#45; outputMaxDeadbad\l&#45; outputStop\l&#45; myTicksToDeg\l&#45; freeSpinMaxDegreesPerSecond\l&#45; freeSpinMinDegreesPerSecond\l|+ getHardwareOutput()\l+ PIDMotor()\l+ ~PIDMotor()\l+ loop()\l+ velocityLoop()\l+ overrideCurrentPosition()\l+ setSetpoint()\l+ startInterpolation()\l+ isInterpolationDone()\l+ getInterpolationUnitIncrement()\land 22 more...\l# setOutput()\l# calcVel()\l# myFmap()\l# getSetPoint()\l}" alt="" coords="5,277,221,941"/>
+<area shape="rect" id="node3" href="$classRBEPID.html" title="{RBEPID\n|+ kp\l+ ki\l+ kd\l+ last_error\l+ sum_error\l+ sampleRateMs\l|+ RBEPID()\l+ setpid()\l+ calc()\l+ clearIntegralBuffer()\l}" alt="" coords="39,5,187,200"/>
+<area shape="rect" id="node4" href="$classIRCamSimplePacketComsServer.html" title="{IRCamSimplePacketComsServer\n|&#45; camera\l&#45; bufferCache\l|+ IRCamSimplePacketComsServer()\l+ ~IRCamSimplePacketComsServer()\l+ event()\l+ loop()\l+ print()\l+ readX()\l+ readY()\l}" alt="" coords="246,519,493,699"/>
+<area shape="rect" id="node6" href="$classGetIMU.html" title="{GetIMU\n|&#45; bno\l&#45; bufferINTERNAL\l&#45; started\l&#45; updateIndex\l&#45; absoluteRotation\l&#45; lastRotation\l&#45; firstRotationRead\l|+ GetIMU()\l+ event()\l+ loop()\l+ startSensor()\l+ print()\l+ getLINEARACCEL_X()\l+ getLINEARACCEL_Y()\l+ getLINEARACCEL_Z()\l+ getGYROSCOPE_X()\l+ getGYROSCOPE_Y()\land 13 more...\l}" alt="" coords="517,453,688,765"/>
 </map>

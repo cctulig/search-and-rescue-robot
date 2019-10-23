@@ -1,6 +1,5 @@
 <map id="PIDMotor" name="PIDMotor">
-<area shape="rect" id="node1" title=" " alt="" coords="266,5,481,699"/>
-<area shape="rect" id="node2" href="$classHBridgeEncoderPIDMotor.html" title=" " alt="" coords="5,761,235,956"/>
-<area shape="rect" id="node3" href="$classServoAnalogPIDMotor.html" title=" " alt="" coords="259,747,488,971"/>
-<area shape="rect" id="node4" href="$classServoEncoderPIDMotor.html" title=" " alt="" coords="512,769,741,949"/>
+<area shape="rect" id="node2" href="$classHBridgeEncoderPIDMotor.html" title="{HBridgeEncoderPIDMotor\n|+ encoder\l+ motor\l&#45; directionPin\l|+ HBridgeEncoderPIDMotor()\l+ ~HBridgeEncoderPIDMotor()\l+ attach()\l+ getPosition()\l+ setOutput()\l+ overrideCurrentPositionHardware()\l+ calcCur()\l}" alt="" coords="5,761,240,956"/>
+<area shape="rect" id="node3" href="$classServoAnalogPIDMotor.html" title="{ServoAnalogPIDMotor\n|&#45; motor\l&#45; adcPin\l&#45; offset\l&#45; filterBuffer\l&#45; filterIndex\l&#45; filterSum\l|+ ServoAnalogPIDMotor()\l+ attach()\l+ getPosition()\l+ setOutput()\l+ overrideCurrentPositionHardware()\l+ calcCur()\l}" alt="" coords="264,747,499,971"/>
+<area shape="rect" id="node4" href="$classServoEncoderPIDMotor.html" title="{ServoEncoderPIDMotor\n|+ encoder\l+ motor\l|+ ServoEncoderPIDMotor()\l+ ~ServoEncoderPIDMotor()\l+ attach()\l+ getPosition()\l+ setOutput()\l+ overrideCurrentPositionHardware()\l+ calcCur()\l}" alt="" coords="523,769,757,949"/>
 </map>

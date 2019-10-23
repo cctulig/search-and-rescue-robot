@@ -1,9 +1,8 @@
 <map id="PIDMotor::SetTunings" name="PIDMotor::SetTunings">
-<area shape="rect" id="node1" title=" " alt="" coords="5,64,155,91"/>
-<area shape="rect" id="node2" href="$classPIDMotor.html#a804fb78d6d87e55d96d4b798935c8809" title=" " alt="" coords="213,5,363,32"/>
-<area shape="rect" id="node3" href="$classPIDMotor.html#a57d2725997f8dfd23af5fdcfd8e97928" title=" " alt="" coords="203,57,373,98"/>
-<area shape="rect" id="node7" href="$classRBEPID.html#a38127aaf2918707921b3e8e6c27692f5" title=" " alt="" coords="231,123,345,149"/>
-<area shape="rect" id="node4" href="$classRBEPID.html#adc6954f2aaa12295fc58ca1dcfca3dc1" title=" " alt="" coords="421,5,603,32"/>
-<area shape="rect" id="node5" href="$classPIDMotor.html#a6a1452c87f6abd3729ec12824a74abca" title=" " alt="" coords="427,57,597,98"/>
-<area shape="rect" id="node6" href="$classPIDMotor.html#a0aba3994cd6722646cce3f62a5cc056b" title=" " alt="" coords="422,123,602,149"/>
+<area shape="rect" id="node2" href="$classPIDMotor.html#a804fb78d6d87e55d96d4b798935c8809" title="PIDMotor::getPosition" alt="" coords="217,5,368,32"/>
+<area shape="rect" id="node3" href="$classPIDMotor.html#a57d2725997f8dfd23af5fdcfd8e97928" title="PIDMotor::overrideCurrent\lPosition" alt="" coords="205,57,380,98"/>
+<area shape="rect" id="node7" href="$classRBEPID.html#a38127aaf2918707921b3e8e6c27692f5" title="RBEPID::setpid" alt="" coords="235,123,351,149"/>
+<area shape="rect" id="node4" href="$classRBEPID.html#adc6954f2aaa12295fc58ca1dcfca3dc1" title="RBEPID::clearIntegralBuffer" alt="" coords="428,5,615,32"/>
+<area shape="rect" id="node5" href="$classPIDMotor.html#a6a1452c87f6abd3729ec12824a74abca" title="PIDMotor::overrideCurrent\lPositionHardware" alt="" coords="434,57,609,98"/>
+<area shape="rect" id="node6" href="$classPIDMotor.html#a0aba3994cd6722646cce3f62a5cc056b" title="PIDMotor::startInterpolation" alt="" coords="430,123,613,149"/>
 </map>

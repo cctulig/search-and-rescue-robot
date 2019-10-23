@@ -1,5 +1,4 @@
 <map id="HBridgeEncoderPIDMotor" name="HBridgeEncoderPIDMotor">
-<area shape="rect" id="node1" title=" " alt="" coords="5,991,235,1185"/>
-<area shape="rect" id="node2" href="$classPIDMotor.html" title=" " alt="" coords="13,277,227,941"/>
-<area shape="rect" id="node3" href="$classRBEPID.html" title=" " alt="" coords="47,5,193,200"/>
+<area shape="rect" id="node2" href="$classPIDMotor.html" title="{PIDMotor\n|+ hardwareOutput\l+ targetDegreesPerSecond\l+ mode\l+ unitDuration\l# lastTimeRunPID\l# Setpoint\l# Input\l# Output\l# lastErrPositive\l# curTime\l# prevTime\l# timeInterval\l# movement\l# prevPos\l# Vel\l# startSetpoint\l# endSetpoint\l# startTime\l# duration\l&#45; outputMin\l&#45; outputMax\l&#45; outputMinDeadbad\l&#45; outputMaxDeadbad\l&#45; outputStop\l&#45; myTicksToDeg\l&#45; freeSpinMaxDegreesPerSecond\l&#45; freeSpinMinDegreesPerSecond\l|+ getHardwareOutput()\l+ PIDMotor()\l+ ~PIDMotor()\l+ loop()\l+ velocityLoop()\l+ overrideCurrentPosition()\l+ setSetpoint()\l+ startInterpolation()\l+ isInterpolationDone()\l+ getInterpolationUnitIncrement()\land 22 more...\l# setOutput()\l# calcVel()\l# myFmap()\l# getSetPoint()\l}" alt="" coords="15,277,231,941"/>
+<area shape="rect" id="node3" href="$classRBEPID.html" title="{RBEPID\n|+ kp\l+ ki\l+ kd\l+ last_error\l+ sum_error\l+ sampleRateMs\l|+ RBEPID()\l+ setpid()\l+ calc()\l+ clearIntegralBuffer()\l}" alt="" coords="49,5,197,200"/>
 </map>
