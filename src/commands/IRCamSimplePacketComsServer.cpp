@@ -9,7 +9,7 @@
 
 IRCamSimplePacketComsServer::IRCamSimplePacketComsServer(
 		DFRobotIRPosition * cam) :
-		PacketEvent(1590) {
+		PacketEventAbstract(1590) {
 	camera = cam;
 }
 

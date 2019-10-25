@@ -10,7 +10,7 @@
 #include <SimplePacketComs.h>
 #include <DFRobotIRPosition.h>
 
-class IRCamSimplePacketComsServer: public PacketEvent {
+class IRCamSimplePacketComsServer: public PacketEventAbstract {
 private:
 	DFRobotIRPosition * camera;
 	float  bufferCache[8];
