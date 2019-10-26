@@ -8,11 +8,11 @@
 #ifndef SRC_CONFIG_H_
 #define SRC_CONFIG_H_
 
-#define TEAM_NAME "IMU-Team0"
+#define TEAM_NAME "Sharktopus"
 
 #define USE_WIFI
-#define USE_IR_CAM
-#define USE_IMU
+//#define USE_IR_CAM
+//#define USE_IMU
 
 #define WHEEL_TRACK 175.0
 #define WHEEL_RADIUS (2.0*25.4/2.0)
@@ -23,7 +23,7 @@
 /**
  * Enable for all h-bridges
  */
-#define H_BRIDGE_ENABLE             13
+#define H_BRIDGE_ENABLE 13
 // Pins
 /**
  * Drive motor 1 10Khz full duty PWM pin
