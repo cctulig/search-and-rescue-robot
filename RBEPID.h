@@ -17,7 +17,11 @@ public:
 	float kd = 0;
 	float last_error = 0;
 	float sum_error = 0;
+	int err_index = 0;
+	float errors[16] = { 0 };
+	int err_size = 16;
 	int sampleRateMs = 5;
+	bool err_positive = true;
 	/**
 	 * setpid set PID constants
 	 */
@@ -35,6 +39,8 @@ public:
 	 *
 	 */
 	void clearIntegralBuffer();
+
+	void updateErrorIndex();
 private:
 
 };
