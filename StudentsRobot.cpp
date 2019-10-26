@@ -109,9 +109,9 @@ void StudentsRobot::updateStateMachine() {
 
 		digitalWrite(H_BRIDGE_ENABLE, 1);
 		// Start an interpolation of the motors
-		motor1->startInterpolationDegrees(motor1->getAngleDegrees(), 1000, SIN);
-		motor2->startInterpolationDegrees(motor2->getAngleDegrees(), 1000, SIN);
-		motor3->startInterpolationDegrees(motor3->getAngleDegrees(), 1000, SIN);
+		motor1->startInterpolationDegrees(720, 1000, SIN);
+		motor2->startInterpolationDegrees(720, 1000, SIN);
+		//motor3->startInterpolationDegrees(motor3->getAngleDegrees(), 1000, SIN);
 		status = WAIT_FOR_MOTORS_TO_FINNISH; // set the state machine to wait for the motors to finish
 		nextStatus = Running; // the next status to move to when the motors finish
 		startTime = now + 1000; // the motors should be done in 1000 ms
@@ -123,6 +123,9 @@ void StudentsRobot::updateStateMachine() {
 		nextTime = nextTime + 100; // ensure no timer drift by incremeting the target
 		// After 1000 ms, come back to this state
 		nextStatus = Running;
+
+		Serial.println(motor1->getAngleDegrees());
+		Serial.println(motor2->getAngleDegrees());
 
 		// Do something
 		if (!digitalRead(BOOT_FLAG_PIN)) {
