@@ -23,8 +23,11 @@ float PIDMotor::myFmap(float x, float in_min, float in_max, float out_min,
 }
 
 PIDMotor::PIDMotor() {
-	Vel = 0;
-	prevTime = 0;
+	//Vel = 0;
+	//prevTime = 0;
+
+	double effort = velocityPID.calc(targetDegreesPerSecond, Vel);
+	setOutputUnitVector(effort);
 }
 
 PIDMotor::~PIDMotor() {

@@ -35,7 +35,7 @@ float RBEPID::calc(double setPoint, double curPosition) {
 	// calculate error
 	float err = setPoint - curPosition;
 	// calculate derivative of error
-	float err_d = last_error - err;
+	//float err_d = last_error - err;
 	// calculate integral error. Running average is best but hard to implement
 	sum_error = sum_error + err - errors[err_index];
 
@@ -43,7 +43,7 @@ float RBEPID::calc(double setPoint, double curPosition) {
 	// sum up the error value to send to the motor based off gain values.
 	//TODO
 
-	float out = err * kp + err_d * kd + err_i * ki;	// simple P controller
+	float out = err * kp + err_i * ki;	// simple PI controller
 	//return the control signal from -1 to 1
 	if (out > 1)
 		out = 1;

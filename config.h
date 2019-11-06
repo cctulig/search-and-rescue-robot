@@ -11,8 +11,8 @@
 #define TEAM_NAME "Sharktopus"
 
 #define USE_WIFI
-//#define USE_IR_CAM
-//#define USE_IMU
+#define USE_IR_CAM
+#define USE_IMU
 
 #define WHEEL_TRACK 175.0
 #define WHEEL_RADIUS (2.0*25.4/2.0)
