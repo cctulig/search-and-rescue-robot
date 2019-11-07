@@ -18,8 +18,8 @@ public:
 	float last_error = 0;
 	float sum_error = 0;
 	int err_index = 0;
-	float errors[16] = { 0 };
-	int err_size = 16;
+	//float errors[16] = { 0 };
+	int err_size = 0;
 	int sampleRateMs = 5;
 	bool err_positive = true;
 	/**
