@@ -32,8 +32,8 @@ StudentsRobot::StudentsRobot(PIDMotor * motor1, PIDMotor * motor2,
 	motor2->myPID.setpid(0.00015, 0, 0);
 	motor3->myPID.setpid(0.00015, 0, 0);
 
-	motor1->velocityPID.setpid(0.1, 0, 0);
-	motor2->velocityPID.setpid(0.1, 0, 0);
+	motor1->velocityPID.setpid(0.005, 0.0001, 0);
+	motor2->velocityPID.setpid(0.005, 0.00015, 0);
 	motor3->velocityPID.setpid(0.1, 0, 0);
 	// compute ratios and bounding
 	double motorToWheel = 3;
@@ -111,9 +111,14 @@ void StudentsRobot::updateStateMachine() {
 		// Start an interpolation of the motors
 		//motor1->startInterpolationDegrees(720, 1000, SIN);
 		//motor2->startInterpolationDegrees(720, 1000, SIN);
-		//motor3->startInterpolationDegrees(motor3->getAngleDegrees(), 1000, SIN);
-		status = WAIT_FOR_MOTORS_TO_FINNISH; // set the state machine to wait for the motors to finish
-		nextStatus = Running; // the next status to move to when the motors finish
+		//motor3->startInterpolationD egrees(motor3->getAngleDegrees(), 1000, SIN);
+
+		//motor1->setVelocityDegreesPerSecond(300);
+		//motor2->setVelocityDegreesPerSecond(300);
+		targetDist = 745.6f*2.0f; //radius = 2.74 cm
+
+		status = Running; // set the state machine to wait for the motors to finish
+		nextStatus = Halting; // the next status to move to when the motors finish
 		startTime = now + 1000; // the motors should be done in 1000 ms
 		nextTime = startTime + 1000; // the next timer loop should be 1000ms after the motors stop
 		break;
@@ -150,6 +155,11 @@ void StudentsRobot::updateStateMachine() {
 	case WAIT_FOR_MOTORS_TO_FINNISH:
 		if (motor1->isInterpolationDone() && motor2->isInterpolationDone()
 				&& motor3->isInterpolationDone()) {
+			status = nextStatus;
+		}
+		break;
+	case WAIT_FOR_DISTANCE:
+		if (motor1->getAngleDegrees() >= targetDist) {
 			status = nextStatus;
 		}
 		break;
