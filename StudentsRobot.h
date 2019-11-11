@@ -24,7 +24,14 @@
  * Feel free to add ot remove values from here
  */
 enum RobotStateMachine {
-	StartupRobot = 0, StartRunning = 1, Running = 2, Halting = 3, Halt = 4,WAIT_FOR_MOTORS_TO_FINNISH=5,WAIT_FOR_TIME=6
+	StartupRobot = 0,
+	StartRunning = 1,
+	Running = 2,
+	Halting = 3,
+	Halt = 4,
+	WAIT_FOR_MOTORS_TO_FINNISH = 5,
+	WAIT_FOR_TIME = 6,
+	WAIT_FOR_DISTANCE = 7
 
 };
 /**
@@ -57,13 +64,15 @@ private:
 	PIDMotor * motor2;
 	PIDMotor * motor3;
 	Servo * servo;
-	float lsensorVal=0;
-	float rsensorVal=0;
-	long nextTime =0;
-  long startTime =0;
+	float lsensorVal = 0;
+	float rsensorVal = 0;
+	long nextTime = 0;
+	long startTime = 0;
 	RobotStateMachine nextStatus = StartupRobot;
 	IRCamSimplePacketComsServer * IRCamera;
 	GetIMU * IMU;
+
+	float targetDist;
 public:
 	/**
 	 * Constructor for StudentsRobot
@@ -75,9 +84,8 @@ public:
 	 * DO NOT reuse pins or fail to attach any of the objects
 	 *
 	 */
-	StudentsRobot(PIDMotor * motor1,
-			PIDMotor * motor2, PIDMotor * motor3,
-			Servo * servo,IRCamSimplePacketComsServer * IRCam,GetIMU * imu);
+	StudentsRobot(PIDMotor * motor1, PIDMotor * motor2, PIDMotor * motor3,
+			Servo * servo, IRCamSimplePacketComsServer * IRCam, GetIMU * imu);
 	/**
 	 * Command status
 	 *
@@ -88,7 +96,6 @@ public:
 	 * This is internal data representing the runtime status of the robot for use in its state machine
 	 */
 	RobotStateMachine status = StartupRobot;
-
 
 	/**
 	 * pidLoop This functoion is called to let the StudentsRobot controll the running of the PID loop functions
