@@ -26,6 +26,7 @@ boolean GetIMU::loop() {
 	imu::Vector<3> v;
 	imu::Vector<3> g;
 	imu::Vector<3> e;
+	float az=0;
 	switch (updateIndex) {
 	case (0):
 		a = bno->getVector(Adafruit_BNO055::VECTOR_LINEARACCEL);
@@ -49,35 +50,39 @@ boolean GetIMU::loop() {
 		e = bno->getVector(Adafruit_BNO055::VECTOR_EULER);
 		bufferINTERNAL[9] = e.z(); // tilt
 		bufferINTERNAL[10] = e.y(); // elevation
-		bufferINTERNAL[11] = e.x(); // azimuth
-		if(firstRotationRead==true){
-			firstRotationRead=false;
-			lastRotation=bufferINTERNAL[11];
+		az = e.x(); // azimuth
+		if (!firstRotationRead) {
+			if (az - lastRotation > 180) {
+				absoluteRotation -= 360.0;
+			}
+			if (az - lastRotation < -180) {
+				absoluteRotation += 360.0;
+			}
+
+		}else{
+			if(az>180)
+				absoluteRotation=-360;
 		}
-		if(bufferINTERNAL[11]-lastRotation>180){
-			absoluteRotation+=360.0;
-		}
-		if(bufferINTERNAL[11]-lastRotation<-180){
-			absoluteRotation-=360.0;
-		}
-		lastRotation=bufferINTERNAL[11];
-		bufferINTERNAL[11]=bufferINTERNAL[11]+absoluteRotation;
+		firstRotationRead = false;
+		lastRotation = az;
+		bufferINTERNAL[11] =az + absoluteRotation;
+
 	}
 	updateIndex++;
 	if (updateIndex == 4) {
 		//updateIndex = 2;// Read two vectors, fast reading
-		updateIndex = 0;// read all vectors
+		updateIndex = 0; // read all vectors
 		return true;
 	}
 	return false;
 }
-float GetIMU::getXPosition(){
+float GetIMU::getXPosition() {
 	return bufferINTERNAL[12];
 }
-float GetIMU::getYPosition(){
+float GetIMU::getYPosition() {
 	return bufferINTERNAL[13];
 }
-float GetIMU::getZPosition(){
+float GetIMU::getZPosition() {
 	return bufferINTERNAL[14];
 }
 void GetIMU::setXPosition(float x) {
