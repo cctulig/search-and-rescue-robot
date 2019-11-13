@@ -17,6 +17,7 @@ StudentsRobot::StudentsRobot(PIDMotor * motor1, PIDMotor * motor2,
 	this->motor3 = motor3;
 	IRCamera = IRCam;
 	IMU = imu;
+	pose = new Pose(motor1, motor2, IMU);
 #if defined(USE_IMU)
 	IMU->setXPosition(200);
 	IMU->setYPosition(0);
@@ -98,6 +99,7 @@ StudentsRobot::StudentsRobot(PIDMotor * motor1, PIDMotor * motor2,
 void StudentsRobot::updateStateMachine() {
 	digitalWrite(WII_CONTROLLER_DETECT, 1);
 	long now = millis();
+	pose->loop();
 	switch (status) {
 	case StartupRobot:
 		//Do this once at startup
@@ -113,11 +115,11 @@ void StudentsRobot::updateStateMachine() {
 		//motor2->startInterpolationDegrees(720, 1000, SIN);
 		//motor3->startInterpolationD egrees(motor3->getAngleDegrees(), 1000, SIN);
 
-		//motor1->setVelocityDegreesPerSecond(300);
-		//motor2->setVelocityDegreesPerSecond(300);
-		targetDist = 745.6f*2.0f; //radius = 2.74 cm
+		motor1->setVelocityDegreesPerSecond(135);
+		motor2->setVelocityDegreesPerSecond(-300);
+		targetDist = 670.8f; //radius = 2.74 cm
 
-		status = Running; // set the state machine to wait for the motors to finish
+		status = WAIT_FOR_DISTANCE; // set the state machine to wait for the motors to finish
 		nextStatus = Halting; // the next status to move to when the motors finish
 		startTime = now + 1000; // the motors should be done in 1000 ms
 		nextTime = startTime + 1000; // the next timer loop should be 1000ms after the motors stop

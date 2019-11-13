@@ -15,6 +15,7 @@
 #include <ESP32Servo.h>
 
 #include "DrivingChassis.h"
+#include "Pose.h"
 #include "src/commands/IRCamSimplePacketComsServer.h"
 #include "src/commands/GetIMU.h"
 
@@ -71,6 +72,7 @@ private:
 	RobotStateMachine nextStatus = StartupRobot;
 	IRCamSimplePacketComsServer * IRCamera;
 	GetIMU * IMU;
+	Pose * pose;
 
 	float targetDist;
 public:
