@@ -20,7 +20,7 @@
  * @return the wheel angle delta in degrees
  */
 float DrivingChassis::distanceToWheelAngle(float distance) {
-	return 0;
+	return distance / (2 * pi * mywheelRadiusMM) * 360;
 }
 
 /**
@@ -37,7 +37,7 @@ float DrivingChassis::distanceToWheelAngle(float distance) {
  * @return is the linear distance the wheel needs to travel given the this CHassis's wheel track
  */
 float DrivingChassis::chassisRotationToWheelDistance(float angle) {
-	return 0;
+	return angle / 360 * (2 * mywheelTrackMM * pi);
 }
 
 DrivingChassis::~DrivingChassis() {
@@ -55,8 +55,13 @@ DrivingChassis::~DrivingChassis() {
  *
  */
 DrivingChassis::DrivingChassis(PIDMotor * left, PIDMotor * right,
-		float wheelTrackMM, float wheelRadiusMM,GetIMU * imu) {
-
+		float wheelTrackMM, float wheelRadiusMM, GetIMU * imu) {
+	myleft = left;
+	myright = right;
+	mywheelTrackMM = wheelTrackMM;
+	mywheelRadiusMM = wheelRadiusMM;
+	pose = new Pose(myleft, myright, imu);
+	IMU = imu;
 }
 
 /**
@@ -107,6 +112,46 @@ bool DrivingChassis::isChassisDoneDriving() {
  * a fast loop function that will update states of the motors based on the information from the
  * imu.
  */
-bool DrivingChassis::loop(){
-return false;
+bool DrivingChassis::loop() {
+
+	if (millis() > lastTimestamp + 20) {
+		DriveStraight(200);
+		pose->updatePose();
+		lastTimestamp = millis();
+	}
+	return false;
+}
+
+void DrivingChassis::DriveStraight(int targetVel) {
+	if (!set_offset) {
+		if(cycle>5){
+		IMU_offsett = IMU->getEULER_azimuth();
+		set_offset = true;
+		}
+		else{
+			cycle++;
+			return;
+		}
+	}
+	target_heading = 0;
+	float IMU_heading = IMU->getEULER_azimuth() - IMU_offsett;
+	float curr_heading = pose->theta * 360 / 2 / 3.14;
+	Serial.println(IMU_offsett);
+	 Serial.println(IMU->getEULER_azimuth());
+
+
+	float err = target_heading - curr_heading;
+	float IMU_err = target_heading - IMU_heading;
+
+	float err_total = -(.9f*IMU_err + .1f*err);
+	float velAdj = err_total * IMU_kp;
+	//Serial.println(err_total);
+
+	if (velAdj > 50)
+		velAdj = 50;
+	if (velAdj < -50)
+		velAdj = -50;
+
+	myleft->setVelocityDegreesPerSecond(targetVel - velAdj);
+	myright->setVelocityDegreesPerSecond(-(targetVel + velAdj));
 }

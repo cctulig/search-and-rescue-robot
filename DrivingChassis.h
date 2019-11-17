@@ -10,6 +10,9 @@
 #include "src/pid/PIDMotor.h"
 #include "src/commands/GetIMU.h"
 #include "config.h"
+#include "Pose.h"
+#define pi 3.14159
+
 /**
  * DrivingChassis encapsulates a 2 wheel differential steered chassis that drives around
  *
@@ -30,6 +33,14 @@ private:
 	GetIMU * IMU;
 	float mywheelTrackMM;
 	float mywheelRadiusMM;
+	float target_heading = 0;
+	float IMU_kp = 5;
+	unsigned long lastTimestamp = 0;
+	bool set_offset = false;
+	int cycle =0;
+	float IMU_offsett = 0;
+
+public:
 	/**
 	 * Compute a delta in wheel angle to traverse a specific distance
 	 *
@@ -57,7 +68,8 @@ private:
 	 * @return is the linear distance the wheel needs to travel given the this CHassis's wheel track
 	 */
 	float chassisRotationToWheelDistance(float angle);
-public:
+
+	Pose * pose;
 	virtual ~DrivingChassis();
 
 	/**
@@ -70,7 +82,7 @@ public:
 	 * @param imu The object that is used to access the IMU data
 	 */
 	DrivingChassis(PIDMotor * left, PIDMotor * right, float wheelTrackMM,
-			float wheelRadiusMM,GetIMU * imu);
+			float wheelRadiusMM, GetIMU * imu);
 
 	/**
 	 * Start a drive forward action
@@ -116,6 +128,8 @@ public:
 	 * @note this function is fast-return and should not block
 	 */
 	bool loop();
+
+	void DriveStraight(int targetVel);
 
 };
 
