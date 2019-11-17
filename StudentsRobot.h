@@ -15,7 +15,6 @@
 #include <ESP32Servo.h>
 
 #include "DrivingChassis.h"
-#include "Pose.h"
 #include "src/commands/IRCamSimplePacketComsServer.h"
 #include "src/commands/GetIMU.h"
 
@@ -72,9 +71,11 @@ private:
 	RobotStateMachine nextStatus = StartupRobot;
 	IRCamSimplePacketComsServer * IRCamera;
 	GetIMU * IMU;
-	Pose * pose;
+	DrivingChassis * chassis;
 
 	float targetDist;
+	float radius = 27.4; //27.4 mm
+	float track = 251.5; //227 mm
 public:
 	/**
 	 * Constructor for StudentsRobot

@@ -17,7 +17,6 @@ StudentsRobot::StudentsRobot(PIDMotor * motor1, PIDMotor * motor2,
 	this->motor3 = motor3;
 	IRCamera = IRCam;
 	IMU = imu;
-	pose = new Pose(motor1, motor2, IMU);
 #if defined(USE_IMU)
 	IMU->setXPosition(200);
 	IMU->setYPosition(0);
@@ -91,6 +90,7 @@ StudentsRobot::StudentsRobot(PIDMotor * motor1, PIDMotor * motor2,
 	pinMode(BOOT_FLAG_PIN, INPUT_PULLUP);
 	//Test IO
 	pinMode(WII_CONTROLLER_DETECT, OUTPUT);
+	chassis = new DrivingChassis(motor1, motor2, track, radius, IMU);
 }
 /**
  * Seperate from running the motor control,
@@ -99,7 +99,7 @@ StudentsRobot::StudentsRobot(PIDMotor * motor1, PIDMotor * motor2,
 void StudentsRobot::updateStateMachine() {
 	digitalWrite(WII_CONTROLLER_DETECT, 1);
 	long now = millis();
-	pose->loop();
+	chassis->loop();
 	switch (status) {
 	case StartupRobot:
 		//Do this once at startup
@@ -113,11 +113,23 @@ void StudentsRobot::updateStateMachine() {
 		// Start an interpolation of the motors
 		//motor1->startInterpolationDegrees(720, 1000, SIN);
 		//motor2->startInterpolationDegrees(720, 1000, SIN);
-		//motor3->startInterpolationD egrees(motor3->getAngleDegrees(), 1000, SIN);
+		//motor3->startInterpolationDegrees(motor3->getAngleDegrees(), 1000, SIN);
 
-		motor1->setVelocityDegreesPerSecond(135);
-		motor2->setVelocityDegreesPerSecond(-300);
-		targetDist = 670.8f; //radius = 2.74 cm
+		motor1->overrideCurrentPosition(0);
+		motor2->overrideCurrentPosition(0);
+		chassis->pose->reset();
+
+		/*
+		 motor1->setVelocityDegreesPerSecond(-150);
+		 motor2->setVelocityDegreesPerSecond(333);
+		 //targetDist = chassis->chassisRotationToWheelDistance(90);
+		 targetDist = chassis->distanceToWheelAngle(293);
+		 */
+		//radius = 2.74 cm
+		//arc: 670.8f, m1 = 150, m2 = -333
+
+		chassis->DriveStraight(200);
+		targetDist = chassis->distanceToWheelAngle(1000);
 
 		status = WAIT_FOR_DISTANCE; // set the state machine to wait for the motors to finish
 		nextStatus = Halting; // the next status to move to when the motors finish
@@ -161,7 +173,7 @@ void StudentsRobot::updateStateMachine() {
 		}
 		break;
 	case WAIT_FOR_DISTANCE:
-		if (motor1->getAngleDegrees() >= targetDist) {
+		if (abs(motor1->getAngleDegrees()) >= targetDist) {
 			status = nextStatus;
 		}
 		break;
