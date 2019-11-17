@@ -15,6 +15,9 @@ Pose::Pose(PIDMotor * left, PIDMotor * right, GetIMU * imu) {
 
 void Pose::updatePose() {
 	unsigned long timestamp = millis();
+
+	//Serial.println(timestamp);
+
 	double encoder0 = myleft->getAngleDegrees();
 	double encoder1 = myright->getAngleDegrees();
 	//double IMUheading = ;
@@ -28,12 +31,12 @@ void Pose::updatePose() {
 	double deltaEncoder1 = encoder1 - lastEncoder1;
 	//double deltaIMU = IMUheading - lastIMUHeading;
 
-	 Serial.print((deltaEncoder0/deltaTime*.04553));
+	/* Serial.print((deltaEncoder0/deltaTime*.04553));
 	 Serial.print(", ");
-	 Serial.println(deltaEncoder1/deltaTime);
+	 Serial.println(deltaEncoder1/deltaTime);*/
 
 	double velRight = (deltaEncoder1 / deltaTime) * 2 * 3.14 * radius / 360;
-	double velLeft = deltaEncoder0 / deltaTime * 2 * 3.14 * radius / 360;
+	double velLeft = -deltaEncoder0 / deltaTime * 2 * 3.14 * radius / 360;
 	double velAvg = (velRight + velLeft) / 2;
 	double omega = (-velRight + velLeft) / track;
 	double prevTheta = theta;
@@ -41,10 +44,10 @@ void Pose::updatePose() {
 
 	//Serial.println(omega);
 
-	Serial.print("velRight=");
+	/*Serial.print("velRight=");
 	Serial.print(velRight);
 	Serial.print(", velLeft=");
-	Serial.println(velLeft);
+	Serial.println(velLeft);*/
 	//Serial.print(", theta=");
 	//Serial.println((theta * 360 / 2 / 3.14));*/
 
@@ -61,17 +64,23 @@ void Pose::updatePose() {
 	lastTimestamp = timestamp;
 	//lastIMUHeading = IMUheading;
 
-	/*Serial.print("Final pose x=");
+	Serial.print("Final pose x=");
 	 Serial.print(x);
 	 Serial.print(" y=");
 	 Serial.print(y);
 	 Serial.print(" theta=");
-	 Serial.println((theta * 360 / 2 / 3.14));*/
+	 Serial.print((theta * 360 / 2 / 3.14));
+	 Serial.print(" IMU=");
+	 Serial.println(IMU->getEULER_azimuth());
 }
 
-bool Pose::loop() {
-	if (millis() > lastTimestamp + 20) {
-		updatePose();
-	}
-	return false;
+void Pose::reset() {
+	x = 0;
+	y = 0;
+	theta = 0;
+	lastEncoder0 = 0;
+	lastEncoder1 = 0;
+	lastIMUHeading = 0;
+	lastTimestamp = -1;
+	omega = 0;
 }

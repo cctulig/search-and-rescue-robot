@@ -14,25 +14,25 @@
 
 class Pose {
 private:
-	int xPos = 0;
-	int yPos = 0;
-	int heading = 0;
-
 	PIDMotor * myleft;
 	PIDMotor * myright;
 	GetIMU * IMU;
 
-	double x, y, theta = 0;
+	int xPos = 0;
+	int yPos = 0;
+	int heading = 0;
 	double lastEncoder0, lastEncoder1, lastIMUHeading = 0;
 	unsigned long lastTimestamp = -1;
 	double radius = 2.61f; //2.61
-	double track = 23.66f;
+	double track = 23.45f; //23.4
 	double omega = 0;
 
 public:
+	double x, y, theta = 0;
+
 	Pose(PIDMotor * left, PIDMotor * right, GetIMU * imu);
 	void updatePose();
-	bool loop();
+	void reset();
 
 };
 
