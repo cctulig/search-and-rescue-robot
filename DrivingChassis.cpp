@@ -113,38 +113,34 @@ bool DrivingChassis::isChassisDoneDriving() {
  * imu.
  */
 bool DrivingChassis::loop() {
-
 	if (millis() > lastTimestamp + 20) {
-		DriveStraight(200);
+		if (!set_offset) {
+			if (cycle > 5) {
+				IMU_offsett = IMU->getEULER_azimuth();
+				set_offset = true;
+			} else {
+				cycle++;
+			}
+		}
 		pose->updatePose();
 		lastTimestamp = millis();
+
 	}
 	return false;
 }
 
-void DrivingChassis::DriveStraight(int targetVel) {
-	if (!set_offset) {
-		if(cycle>5){
-		IMU_offsett = IMU->getEULER_azimuth();
-		set_offset = true;
-		}
-		else{
-			cycle++;
-			return;
-		}
-	}
-	target_heading = 0;
+void DrivingChassis::DriveStraight(int targetVel, float degrees) {
+	target_heading = degrees;
 	float IMU_heading = IMU->getEULER_azimuth() - IMU_offsett;
 	float curr_heading = pose->theta * 360 / 2 / 3.14;
 	Serial.println(IMU_offsett);
-	 Serial.println(IMU->getEULER_azimuth());
-
+	Serial.println(IMU->getEULER_azimuth());
 
 	float err = target_heading - curr_heading;
 	float IMU_err = target_heading - IMU_heading;
 
-	float err_total = -(.9f*IMU_err + .1f*err);
-	float velAdj = err_total * IMU_kp;
+	float err_total = -(.9f * IMU_err + .1f * err);
+	float velAdj = IMU_err;
 	//Serial.println(err_total);
 
 	if (velAdj > 50)
@@ -152,6 +148,45 @@ void DrivingChassis::DriveStraight(int targetVel) {
 	if (velAdj < -50)
 		velAdj = -50;
 
-	myleft->setVelocityDegreesPerSecond(targetVel - velAdj);
-	myright->setVelocityDegreesPerSecond(-(targetVel + velAdj));
+	myleft->setVelocityDegreesPerSecond(-(targetVel - velAdj));
+	myright->setVelocityDegreesPerSecond(targetVel + velAdj);
 }
+
+bool DrivingChassis::Turn(float degrees) {
+	target_heading = degrees;
+	int direction = 1;
+	float IMU_heading = IMU->getEULER_azimuth() - IMU_offsett;
+	float curr_heading = pose->theta * 360 / 2 / 3.14;
+	//Serial.println(IMU_offsett);
+	//Serial.println(IMU->getEULER_azimuth());
+
+	float err = target_heading - curr_heading;
+	float IMU_err = target_heading - IMU_heading;
+
+	float err_total = -(.9f * IMU_err + .1f * err);
+	float velAdj = IMU_err;
+	Serial.println(IMU_err);
+
+	if (velAdj > 50)
+		velAdj = 50;
+	if (velAdj < -50)
+		velAdj = -50;
+
+	if(IMU_err < 4 && IMU_err > -4) {
+		return true;
+	}
+
+	if(IMU_err > 0) {
+		direction = 1;
+	}
+	else {
+		direction = -1;
+	}
+
+
+	myleft->setVelocityDegreesPerSecond((150 )*direction);
+	Serial.println(myleft->getVelocityDegreesPerSecond());
+	myright->setVelocityDegreesPerSecond((150 )*direction);
+	return false;
+}
+

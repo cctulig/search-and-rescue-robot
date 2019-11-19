@@ -129,7 +129,8 @@ public:
 	 */
 	bool loop();
 
-	void DriveStraight(int targetVel);
+	void DriveStraight(int targetVel, float degrees);
+	bool Turn(float degrees);
 
 };
 
