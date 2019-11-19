@@ -24,14 +24,22 @@
  * Feel free to add ot remove values from here
  */
 enum RobotStateMachine {
-	StartupRobot = 0,
-	StartRunning = 1,
-	Running = 2,
-	Halting = 3,
-	Halt = 4,
-	WAIT_FOR_MOTORS_TO_FINNISH = 5,
-	WAIT_FOR_TIME = 6,
-	WAIT_FOR_DISTANCE = 7
+	StartupRobot,
+	StartRunning,
+	Running,
+	DriveToPos2,
+	DriveToPos3,
+	DriveToPos4,
+	DriveToPos3_again,
+	DriveToPos2_again,
+	DriveToPos1_again,
+	ReturnToStart,
+	Halting,
+	Halt,
+	WAIT_FOR_MOTORS_TO_FINNISH,
+	WAIT_FOR_TIME,
+	WAIT_FOR_TURN,
+	WAIT_FOR_DISTANCE
 
 };
 /**
@@ -74,8 +82,10 @@ private:
 	DrivingChassis * chassis;
 
 	float targetDist;
-	float radius = 27.4; //27.4 mm
+	float radius = 28.2; //27.4 mm
 	float track = 251.5; //227 mm
+	float velocity = 0;
+	float degrees = 0;
 public:
 	/**
 	 * Constructor for StudentsRobot

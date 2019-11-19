@@ -127,11 +127,9 @@ void StudentsRobot::updateStateMachine() {
 		 */
 		//radius = 2.74 cm
 		//arc: 670.8f, m1 = 150, m2 = -333
-
-		chassis->DriveStraight(200);
-		targetDist = chassis->distanceToWheelAngle(1000);
-
-		status = WAIT_FOR_DISTANCE; // set the state machine to wait for the motors to finish
+		//chassis->DriveStraight(200);
+		//targetDist = chassis->distanceToWheelAngle(1000);
+		status = Running; // set the state machine to wait for the motors to finish
 		nextStatus = Halting; // the next status to move to when the motors finish
 		startTime = now + 1000; // the motors should be done in 1000 ms
 		nextTime = startTime + 1000; // the next timer loop should be 1000ms after the motors stop
@@ -141,8 +139,8 @@ void StudentsRobot::updateStateMachine() {
 		status = WAIT_FOR_TIME;
 		nextTime = nextTime + 100; // ensure no timer drift by incremeting the target
 		// After 1000 ms, come back to this state
-		nextStatus = Running;
-
+		nextStatus = DriveToPos2;
+		//motor1->setVelocityDegreesPerSecond(30);
 		Serial.println(motor1->getAngleDegrees());
 		Serial.println(motor2->getAngleDegrees());
 
@@ -159,6 +157,47 @@ void StudentsRobot::updateStateMachine() {
 
 		}
 		break;
+	case DriveToPos2:
+		velocity = 200;
+		degrees = 0;
+		targetDist = chassis->distanceToWheelAngle(600);
+		status = WAIT_FOR_DISTANCE;
+		nextStatus = DriveToPos3;
+		break;
+	case DriveToPos3:
+		degrees = 90;
+		status = WAIT_FOR_TURN;
+		nextStatus = DriveToPos4;
+		break;
+	case DriveToPos4:
+		velocity = 200;
+		degrees = 90;
+		targetDist = chassis->distanceToWheelAngle(150);
+		status = WAIT_FOR_DISTANCE;
+		nextStatus = DriveToPos3_again;
+		break;
+	case DriveToPos3_again:
+		degrees = 270;
+		status = WAIT_FOR_TURN;
+		nextStatus = DriveToPos2_again;
+		break;
+	case DriveToPos2_again:
+		degrees = 270;
+		targetDist = chassis->distanceToWheelAngle(140);
+		status = WAIT_FOR_DISTANCE;
+		nextStatus = DriveToPos1_again;
+		break;
+	case DriveToPos1_again:
+		degrees = 180;
+		status = WAIT_FOR_TURN;
+		nextStatus = ReturnToStart;
+		break;
+	case ReturnToStart:
+		degrees = 180;
+		targetDist = chassis->distanceToWheelAngle(610);
+		status = WAIT_FOR_DISTANCE;
+		nextStatus = Halting;
+		break;
 	case WAIT_FOR_TIME:
 		// Check to see if enough time has elapsed
 		if (nextTime <= millis()) {
@@ -173,8 +212,27 @@ void StudentsRobot::updateStateMachine() {
 		}
 		break;
 	case WAIT_FOR_DISTANCE:
+		chassis->DriveStraight(velocity, degrees);
 		if (abs(motor1->getAngleDegrees()) >= targetDist) {
-			status = nextStatus;
+			status = WAIT_FOR_TIME;
+			motor1->setVelocityDegreesPerSecond(0);
+			motor2->setVelocityDegreesPerSecond(0);
+
+			motor1->overrideCurrentPosition(0);
+			motor2->overrideCurrentPosition(0);
+
+			nextTime = millis() + 200;
+		}
+		break;
+	case WAIT_FOR_TURN:
+		if (chassis->Turn(degrees)) {
+			status = WAIT_FOR_TIME;
+			motor1->setVelocityDegreesPerSecond(0);
+			motor2->setVelocityDegreesPerSecond(0);
+			nextTime = millis() + 200;
+
+			motor1->overrideCurrentPosition(0);
+			motor2->overrideCurrentPosition(0);
 		}
 		break;
 	case Halting:
