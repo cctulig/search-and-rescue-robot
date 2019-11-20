@@ -91,6 +91,7 @@ StudentsRobot::StudentsRobot(PIDMotor * motor1, PIDMotor * motor2,
 	//Test IO
 	pinMode(WII_CONTROLLER_DETECT, OUTPUT);
 	chassis = new DrivingChassis(motor1, motor2, track, radius, IMU);
+	pathfinder = new Pathfinder();
 }
 /**
  * Seperate from running the motor control,
@@ -156,47 +157,6 @@ void StudentsRobot::updateStateMachine() {
 #endif
 
 		}
-		break;
-	case DriveToPos2:
-		velocity = 200;
-		degrees = 0;
-		targetDist = chassis->distanceToWheelAngle(600);
-		status = WAIT_FOR_DISTANCE;
-		nextStatus = DriveToPos3;
-		break;
-	case DriveToPos3:
-		degrees = 90;
-		status = WAIT_FOR_TURN;
-		nextStatus = DriveToPos4;
-		break;
-	case DriveToPos4:
-		velocity = 200;
-		degrees = 90;
-		targetDist = chassis->distanceToWheelAngle(150);
-		status = WAIT_FOR_DISTANCE;
-		nextStatus = DriveToPos3_again;
-		break;
-	case DriveToPos3_again:
-		degrees = 270;
-		status = WAIT_FOR_TURN;
-		nextStatus = DriveToPos2_again;
-		break;
-	case DriveToPos2_again:
-		degrees = 270;
-		targetDist = chassis->distanceToWheelAngle(140);
-		status = WAIT_FOR_DISTANCE;
-		nextStatus = DriveToPos1_again;
-		break;
-	case DriveToPos1_again:
-		degrees = 180;
-		status = WAIT_FOR_TURN;
-		nextStatus = ReturnToStart;
-		break;
-	case ReturnToStart:
-		degrees = 180;
-		targetDist = chassis->distanceToWheelAngle(610);
-		status = WAIT_FOR_DISTANCE;
-		nextStatus = Halting;
 		break;
 	case WAIT_FOR_TIME:
 		// Check to see if enough time has elapsed

@@ -17,6 +17,7 @@
 #include "DrivingChassis.h"
 #include "src/commands/IRCamSimplePacketComsServer.h"
 #include "src/commands/GetIMU.h"
+#include "Pathfinder.h"
 
 /**
  * @enum RobotStateMachine
@@ -27,13 +28,6 @@ enum RobotStateMachine {
 	StartupRobot,
 	StartRunning,
 	Running,
-	DriveToPos2,
-	DriveToPos3,
-	DriveToPos4,
-	DriveToPos3_again,
-	DriveToPos2_again,
-	DriveToPos1_again,
-	ReturnToStart,
 	Halting,
 	Halt,
 	WAIT_FOR_MOTORS_TO_FINNISH,
@@ -80,6 +74,7 @@ private:
 	IRCamSimplePacketComsServer * IRCamera;
 	GetIMU * IMU;
 	DrivingChassis * chassis;
+	Pathfinder * pathfinder;
 
 	float targetDist;
 	float radius = 28.2; //27.4 mm
