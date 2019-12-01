@@ -4,6 +4,7 @@
  *  Created on: Nov 20, 2019
  *      Author: Conrad Tulig
  */
+#include <Arduino.h>
 #include <iostream>
 #include <list>
 #include "Node.h"
@@ -27,6 +28,7 @@ public:
 	list<Node*> getVisitedList(Node *start, Node *target);
 	bool haveVisited(Node *current, list<Node*> visisted);
 	void printNodes(list<Node*> path);
+	list<Node*> pathFindTest(int startX, int startY, int endX, int endY);
 };
 
 #endif /* PATHFINDER_H_ */
