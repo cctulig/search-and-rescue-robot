@@ -111,3 +111,42 @@ Node* Pathfinder::checkBounds(int x, int y) {
 	}
 	return &nodes[x][y];
 }
+
+void Pathfinder::printNodes(list<Node*> path) {
+    int length = path.size();
+    for (int i = 0; i < length; i++) {
+        Node temp = path.front();
+        path.pop_front();
+
+        Serial.print("(");
+        Serial.print(temp.xPos);
+        Serial.print(",");
+        Serial.print(temp.yPos);
+        Serial.println(")");
+
+    }
+}
+
+list<Node*> Pathfinder::pathFindTest(int startX, int startY, int endX, int endY) {
+
+    //Road block:
+    nodes[3][1].setType(false);
+
+    Serial.print("Finding path from (");
+    Serial.print(startX);
+    Serial.print(",");
+    Serial.print(startY);
+    Serial.print(") to (");
+    Serial.print(endX);
+    Serial.print(",");
+    Serial.print(endY);
+    Serial.println(").");
+
+    list<Node*> path = pathfind(&nodes[startX][startY], &nodes[endX][endY]);
+
+    Serial.print("Length of path: ");
+    Serial.println(path.size());
+
+    printNodes(path);
+    return path;
+}
