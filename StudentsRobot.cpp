@@ -120,6 +120,9 @@ void StudentsRobot::updateStateMachine() {
 		motor2->overrideCurrentPosition(0);
 		chassis->pose->reset();
 
+		path = pathfinder->pathFindTest(0, 0, 5, 5);
+
+
 		/*
 		 motor1->setVelocityDegreesPerSecond(-150);
 		 motor2->setVelocityDegreesPerSecond(333);
@@ -140,7 +143,7 @@ void StudentsRobot::updateStateMachine() {
 		status = WAIT_FOR_TIME;
 		nextTime = nextTime + 100; // ensure no timer drift by incremeting the target
 		// After 1000 ms, come back to this state
-		nextStatus = DriveToPos2;
+		nextStatus = Pathfinding;
 		//motor1->setVelocityDegreesPerSecond(30);
 		Serial.println(motor1->getAngleDegrees());
 		Serial.println(motor2->getAngleDegrees());
@@ -157,6 +160,9 @@ void StudentsRobot::updateStateMachine() {
 #endif
 
 		}
+		break;
+	case Pathfinding:
+		PathfindingStateMachine(Pathfinding, Halting);
 		break;
 	case WAIT_FOR_TIME:
 		// Check to see if enough time has elapsed
@@ -225,3 +231,49 @@ void StudentsRobot::pidLoop() {
 	motor3->loop();
 }
 
+void StudentsRobot::PathfindingStateMachine(RobotStateMachine currentState, RobotStateMachine nextState) {
+	static int path_state = 0;
+	static Node* current;
+	switch (path_state) {
+	case 0:
+		if (!reachedDestination()) {
+			current = path.front();
+			path.pop_front();
+			degrees = determineNextTurn(current, path.front());
+			status = WAIT_FOR_TURN;
+			nextStatus = currentState;
+			path_state = 1;
+		} else {
+			status = nextState;
+		}
+		break;
+	case 1:
+		//TODO: Perform scanning operations & update path
+		path_state = 2;
+		break;
+	case 2:
+		targetDist = chassis->distanceToWheelAngle(410);
+		status = WAIT_FOR_DISTANCE;
+		nextStatus = currentState;
+		path_state = 0;
+		break;
+	}
+}
+
+int StudentsRobot::determineNextTurn(Node* current, Node* next) {
+
+	if (current->nodes[0] == next)
+		return 0;
+	else if (current->nodes[1] == next)
+		return 90;
+	else if (current->nodes[2] == next)
+		return 180;
+	else
+		return 270;
+}
+
+bool StudentsRobot::reachedDestination() {
+	if (path.size() == 1)
+		return true;
+	return false;
+}
