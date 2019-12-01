@@ -9,6 +9,7 @@
 #define STUDENTSROBOT_H_
 #include "config.h"
 #include <Arduino.h>
+#include <list>
 #include "src/pid/ServoEncoderPIDMotor.h"
 #include "src/pid/HBridgeEncoderPIDMotor.h"
 #include "src/pid/ServoAnalogPIDMotor.h"
@@ -19,6 +20,7 @@
 #include "src/commands/GetIMU.h"
 #include "Pathfinder.h"
 
+
 /**
  * @enum RobotStateMachine
  * These are sample values for a sample state machine.
@@ -28,6 +30,7 @@ enum RobotStateMachine {
 	StartupRobot,
 	StartRunning,
 	Running,
+	Pathfinding,
 	Halting,
 	Halt,
 	WAIT_FOR_MOTORS_TO_FINNISH,
@@ -76,10 +79,11 @@ private:
 	DrivingChassis * chassis;
 	Pathfinder * pathfinder;
 
+	list<Node*> path;
 	float targetDist;
 	float radius = 28.2; //27.4 mm
 	float track = 251.5; //227 mm
-	float velocity = 0;
+	float velocity = 200;
 	float degrees = 0;
 public:
 	/**
@@ -117,6 +121,10 @@ public:
 	 * the students state machine can be updated with this function
 	 */
 	void updateStateMachine();
+
+	void PathfindingStateMachine(RobotStateMachine currentState, RobotStateMachine nextState);
+	int determineNextTurn(Node* current, Node* next);
+	bool reachedDestination();
 };
 
 #endif /* STUDENTSROBOT_H_ */
