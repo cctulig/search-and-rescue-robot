@@ -120,7 +120,7 @@ void StudentsRobot::updateStateMachine() {
 		motor2->overrideCurrentPosition(0);
 		chassis->pose->reset();
 
-		path = pathfinder->pathFindTest(0, 0, 5, 5);
+		path = pathfinder->generateInitialPath();
 
 
 		/*
