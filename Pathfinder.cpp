@@ -113,40 +113,87 @@ Node* Pathfinder::checkBounds(int x, int y) {
 }
 
 void Pathfinder::printNodes(list<Node*> path) {
-    int length = path.size();
-    for (int i = 0; i < length; i++) {
-        Node temp = path.front();
-        path.pop_front();
+	int length = path.size();
+	for (int i = 0; i < length; i++) {
+		Node temp = path.front();
+		path.pop_front();
 
-        Serial.print("(");
-        Serial.print(temp.xPos);
-        Serial.print(",");
-        Serial.print(temp.yPos);
-        Serial.println(")");
+		Serial.print("(");
+		Serial.print(temp.xPos);
+		Serial.print(",");
+		Serial.print(temp.yPos);
+		Serial.println(")");
 
-    }
+	}
 }
 
-list<Node*> Pathfinder::pathFindTest(int startX, int startY, int endX, int endY) {
+list<Node*> Pathfinder::pathFindTest(int startX, int startY, int endX,
+		int endY) {
 
-    //Road block:
-    nodes[3][1].setType(false);
+	//Road block:
+	nodes[3][1].setType(false);
 
-    Serial.print("Finding path from (");
-    Serial.print(startX);
-    Serial.print(",");
-    Serial.print(startY);
-    Serial.print(") to (");
-    Serial.print(endX);
-    Serial.print(",");
-    Serial.print(endY);
-    Serial.println(").");
+	Serial.print("Finding path from (");
+	Serial.print(startX);
+	Serial.print(",");
+	Serial.print(startY);
+	Serial.print(") to (");
+	Serial.print(endX);
+	Serial.print(",");
+	Serial.print(endY);
+	Serial.println(").");
 
-    list<Node*> path = pathfind(&nodes[startX][startY], &nodes[endX][endY]);
+	list<Node*> path = pathfind(&nodes[startX][startY], &nodes[endX][endY]);
 
-    Serial.print("Length of path: ");
-    Serial.println(path.size());
+	Serial.print("Length of path: ");
+	Serial.println(path.size());
 
-    printNodes(path);
-    return path;
+	printNodes(path);
+	return path;
+}
+
+list<Node*> Pathfinder::generateInitialPath() {
+	list<Node*> path;
+
+	path.push_back(&nodes[0][0]);
+	path.push_back(&nodes[0][1]);
+	path.push_back(&nodes[1][1]);
+	path.push_back(&nodes[2][1]);
+	path.push_back(&nodes[3][1]);
+	path.push_back(&nodes[4][1]);
+	path.push_back(&nodes[4][2]);
+	path.push_back(&nodes[4][3]);
+	path.push_back(&nodes[3][3]);
+	path.push_back(&nodes[2][3]);
+	path.push_back(&nodes[1][3]);
+
+	return path;
+}
+
+list<Node*> Pathfinder::addBuildingSearch(Node* start, Node* building) {
+	list<Node*> path;
+	Node* current = start;
+	Node* target;
+
+	for (int i = 0; i < 4; i++) {
+		if (building->nodes[i]->isStreet()) {
+			target = building->nodes[i];
+			path = pushListBack(path, pathfind(current, target));
+			current = target;
+		}
+	}
+
+	path = pushListBack(path, pathfind(current, start));
+
+	return path;
+}
+
+list<Node*> Pathfinder::pushListBack(list<Node*> orig, list<Node*> added) {
+	int length = added.size();
+	for (int i = 0; i < length; i++) {
+		orig.push_front(added.back());
+		added.pop_back();
+	}
+
+	return orig;
 }

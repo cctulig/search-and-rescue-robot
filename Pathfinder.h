@@ -29,6 +29,9 @@ public:
 	bool haveVisited(Node *current, list<Node*> visisted);
 	void printNodes(list<Node*> path);
 	list<Node*> pathFindTest(int startX, int startY, int endX, int endY);
+	list<Node*> generateInitialPath();
+	list<Node*> addBuildingSearch(Node* current, Node* building);
+	list<Node*> Pathfinder::pushListBack(list<Node*> orig, list<Node*> added);
 };
 
 #endif /* PATHFINDER_H_ */
