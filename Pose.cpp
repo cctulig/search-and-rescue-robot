@@ -64,14 +64,14 @@ void Pose::updatePose() {
 	lastTimestamp = timestamp;
 	//lastIMUHeading = IMUheading;
 
-	Serial.print("Final pose x=");
+	/*Serial.print("Final pose x=");
 	 Serial.print(x);
 	 Serial.print(" y=");
 	 Serial.print(y);
 	 Serial.print(" theta=");
 	 Serial.print((theta * 360 / 2 / 3.14));
 	 Serial.print(" IMU=");
-	 Serial.println(IMU->getEULER_azimuth());
+	 Serial.println(IMU->getEULER_azimuth());*/
 }
 
 void Pose::reset() {
