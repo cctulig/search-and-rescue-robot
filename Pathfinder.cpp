@@ -81,6 +81,11 @@ void Pathfinder::createNodes() {
 			nodes[x][y] = new Node(true);
 			nodes[x][y].xPos = x;
 			nodes[x][y].yPos = y;
+			Serial.print("(");
+			Serial.print(nodes[x][y].xPos);
+			Serial.print(",");
+			Serial.print(nodes[x][y].yPos);
+			Serial.println(")");
 		}
 	}
 }
@@ -115,13 +120,13 @@ Node* Pathfinder::checkBounds(int x, int y) {
 void Pathfinder::printNodes(list<Node*> path) {
 	int length = path.size();
 	for (int i = 0; i < length; i++) {
-		Node temp = path.front();
+		Node* temp = path.front();
 		path.pop_front();
 
 		Serial.print("(");
-		Serial.print(temp.xPos);
+		Serial.print(temp->xPos);
 		Serial.print(",");
-		Serial.print(temp.yPos);
+		Serial.print(temp->yPos);
 		Serial.println(")");
 
 	}
@@ -170,7 +175,7 @@ list<Node*> Pathfinder::generateInitialPath() {
 	return path;
 }
 
-list<Node*> Pathfinder::addBuildingSearch(Node* start, Node* building) {
+list<Node*> Pathfinder::addBuildingSearch(list<Node*> final_path, Node* start, Node* building) {
 	list<Node*> path;
 	Node* current = start;
 	Node* target;
@@ -178,21 +183,27 @@ list<Node*> Pathfinder::addBuildingSearch(Node* start, Node* building) {
 	for (int i = 0; i < 4; i++) {
 		if (building->nodes[i]->isStreet()) {
 			target = building->nodes[i];
+			Serial.println("Adding building side: ");
+			printNodes(pathfind(current, target));
 			path = pushListBack(path, pathfind(current, target));
 			current = target;
+			Serial.println("Done");
 		}
 	}
 
 	path = pushListBack(path, pathfind(current, start));
+	final_path = pushListBack(path, final_path);
+	final_path.push_front(start);
 
-	return path;
+	return final_path;
 }
 
 list<Node*> Pathfinder::pushListBack(list<Node*> orig, list<Node*> added) {
+	added.pop_front();
 	int length = added.size();
 	for (int i = 0; i < length; i++) {
-		orig.push_front(added.back());
-		added.pop_back();
+		orig.push_back(added.front());
+		added.pop_front();
 	}
 
 	return orig;

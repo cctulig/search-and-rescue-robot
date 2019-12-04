@@ -30,8 +30,8 @@ public:
 	void printNodes(list<Node*> path);
 	list<Node*> pathFindTest(int startX, int startY, int endX, int endY);
 	list<Node*> generateInitialPath();
-	list<Node*> addBuildingSearch(Node* current, Node* building);
-	list<Node*> Pathfinder::pushListBack(list<Node*> orig, list<Node*> added);
+	list<Node*> addBuildingSearch(list<Node*> final_path, Node* current, Node* building);
+	list<Node*> pushListBack(list<Node*> orig, list<Node*> added);
 };
 
 #endif /* PATHFINDER_H_ */
