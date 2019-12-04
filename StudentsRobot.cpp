@@ -120,7 +120,12 @@ void StudentsRobot::updateStateMachine() {
 		motor2->overrideCurrentPosition(0);
 		chassis->pose->reset();
 
+		//path = pathfinder->pathFindTest(0, 0, 4, 4);
 		path = pathfinder->generateInitialPath();
+		path.pop_front();
+		path.pop_front();
+		path = pathfinder->addBuildingSearch(path, path.front(), path.front()->nodes[2]);
+		pathfinder->printNodes(path);
 
 
 		/*
@@ -133,7 +138,7 @@ void StudentsRobot::updateStateMachine() {
 		//arc: 670.8f, m1 = 150, m2 = -333
 		//chassis->DriveStraight(200);
 		//targetDist = chassis->distanceToWheelAngle(1000);
-		status = Running; // set the state machine to wait for the motors to finish
+		status = Halting; // set the state machine to wait for the motors to finish
 		nextStatus = Halting; // the next status to move to when the motors finish
 		startTime = now + 1000; // the motors should be done in 1000 ms
 		nextTime = startTime + 1000; // the next timer loop should be 1000ms after the motors stop
