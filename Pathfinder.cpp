@@ -53,7 +53,7 @@ list<Node*> Pathfinder::getVisitedList(Node *start, Node *target) {
 		}
 
 		for (int i = 0; i < 4; i++) {
-			if (current->nodes[i]->isStreet()
+			if (current->nodes[i]->street
 					&& !haveVisited(current->nodes[i], visited)) {
 				queue.push_back(current->nodes[i]);
 			}
@@ -93,7 +93,8 @@ void Pathfinder::createNodes() {
 void Pathfinder::setBuildings() {
 	for (int x = 1; x < 6; x += 2) {
 		for (int y = 0; y < 6; y += 2) {
-			nodes[x][y].setType(false);
+			nodes[x][y].street = false;
+			nodes[x][y].buildingLot = true;
 		}
 	}
 }
@@ -136,7 +137,7 @@ list<Node*> Pathfinder::pathFindTest(int startX, int startY, int endX,
 		int endY) {
 
 	//Road block:
-	nodes[3][1].setType(false);
+	nodes[3][1].street = false;
 
 	Serial.print("Finding path from (");
 	Serial.print(startX);
@@ -157,6 +158,13 @@ list<Node*> Pathfinder::pathFindTest(int startX, int startY, int endX,
 	return path;
 }
 
+void Pathfinder::addBuildingsAndRoadBlock() {
+	nodes[3][1].street = false;
+
+	nodes[1][2].
+}
+
+
 list<Node*> Pathfinder::generateInitialPath() {
 	list<Node*> path;
 
@@ -175,23 +183,26 @@ list<Node*> Pathfinder::generateInitialPath() {
 	return path;
 }
 
-list<Node*> Pathfinder::addBuildingSearch(list<Node*> final_path, Node* start, Node* building) {
+list<Node*> Pathfinder::addBuildingSearch(list<Node*> final_path,
+		Node* building) {
 	list<Node*> path;
+	Node* start = final_path.front();
 	Node* current = start;
+	final_path.pop_front();
+	Node* next = final_path.front();
+	final_path.push_front(start);
 	Node* target;
 
-	for (int i = 0; i < 4; i++) {
-		if (building->nodes[i]->isStreet()) {
-			target = building->nodes[i];
-			Serial.println("Adding building side: ");
-			printNodes(pathfind(current, target));
+	for (int i = 2; i < 6; i++) {
+		int pos = i % 4;
+		if (building->nodes[pos]->street) {
+			target = building->nodes[pos];
 			path = pushListBack(path, pathfind(current, target));
 			current = target;
-			Serial.println("Done");
 		}
 	}
 
-	path = pushListBack(path, pathfind(current, start));
+	path = pushListBack(path, pathfind(current, next));
 	final_path = pushListBack(path, final_path);
 	final_path.push_front(start);
 

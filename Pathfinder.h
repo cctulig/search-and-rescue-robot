@@ -29,8 +29,9 @@ public:
 	bool haveVisited(Node *current, list<Node*> visisted);
 	void printNodes(list<Node*> path);
 	list<Node*> pathFindTest(int startX, int startY, int endX, int endY);
+	void addBuildingsAndRoadBlock();
 	list<Node*> generateInitialPath();
-	list<Node*> addBuildingSearch(list<Node*> final_path, Node* current, Node* building);
+	list<Node*> addBuildingSearch(list<Node*> final_path, Node* building);
 	list<Node*> pushListBack(list<Node*> orig, list<Node*> added);
 };
 
