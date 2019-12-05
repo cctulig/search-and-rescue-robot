@@ -77,10 +77,10 @@ StudentsRobot::StudentsRobot(PIDMotor * motor1, PIDMotor * motor2,
 			50 // the speed in degrees per second that the motor spins when the hardware output is at creep forwards
 			);
 	// Set up the Analog sensors
-	pinMode(ANALOG_SENSE_ONE, ANALOG);
-	pinMode(ANALOG_SENSE_TWO, ANALOG);
-	pinMode(ANALOG_SENSE_THREE, ANALOG);
-	pinMode(ANALOG_SENSE_FOUR, ANALOG);
+	/*pinMode(ANALOG_SENSE_ONE, ANALOG);
+	 pinMode(ANALOG_SENSE_TWO, ANALOG);
+	 pinMode(ANALOG_SENSE_THREE, ANALOG);
+	 pinMode(ANALOG_SENSE_FOUR, ANALOG);*/
 	// H-Bridge enable pin
 	pinMode(H_BRIDGE_ENABLE, OUTPUT);
 	// Stepper pins
@@ -92,6 +92,9 @@ StudentsRobot::StudentsRobot(PIDMotor * motor1, PIDMotor * motor2,
 	pinMode(WII_CONTROLLER_DETECT, OUTPUT);
 	chassis = new DrivingChassis(motor1, motor2, track, radius, IMU);
 	pathfinder = new Pathfinder();
+	UltraSonicServo.attach(ULTRASONIC_SERVO_PIN);
+	pinMode(US_TRIG_PIN, OUTPUT);
+	pinMode(US_ECHO_PIN, INPUT);
 }
 /**
  * Seperate from running the motor control,
@@ -119,14 +122,14 @@ void StudentsRobot::updateStateMachine() {
 		motor1->overrideCurrentPosition(0);
 		motor2->overrideCurrentPosition(0);
 		chassis->pose->reset();
+		clearAdjencies();
 
 		//path = pathfinder->pathFindTest(0, 0, 4, 4);
 		path = pathfinder->generateInitialPath();
+		/*path.pop_front();
 		path.pop_front();
-		path.pop_front();
-		path = pathfinder->addBuildingSearch(path, path.front(), path.front()->nodes[2]);
-		pathfinder->printNodes(path);
-
+		path = pathfinder->addBuildingSearch(path, path.front()->nodes[0]);
+		pathfinder->printNodes(path);*/
 
 		/*
 		 motor1->setVelocityDegreesPerSecond(-150);
@@ -206,6 +209,39 @@ void StudentsRobot::updateStateMachine() {
 			motor2->overrideCurrentPosition(0);
 		}
 		break;
+	case SCAN_LEFT:
+		if (UltraSonicServo.read() < 1) {
+			if (readUltrasonic() > 10) {
+				int adj = (cardinalDirection - 1) % 4;
+				adjacencies[adj] = 1;
+			}
+
+			UltraSonicServo.write(90);
+			status = SCAN_MIDDLE;
+		}
+		break;
+	case SCAN_MIDDLE:
+		if (UltraSonicServo.read() > 89 && UltraSonicServo.read() < 91) {
+			if (readUltrasonic() > 10) {
+				int adj = cardinalDirection;
+				adjacencies[adj] = 1;
+			}
+
+			UltraSonicServo.write(180);
+			status = SCAN_RIGHT;
+		}
+		break;
+	case SCAN_RIGHT:
+		if (UltraSonicServo.read() > 179) {
+			if (readUltrasonic() > 10) {
+				int adj = (cardinalDirection + 1) % 4;
+				adjacencies[adj] = 1;
+			}
+
+			UltraSonicServo.write(0);
+			status = nextStatus;
+		}
+		break;
 	case Halting:
 		// save state and enter safe mode
 		Serial.println("Halting State machine");
@@ -236,7 +272,8 @@ void StudentsRobot::pidLoop() {
 	motor3->loop();
 }
 
-void StudentsRobot::PathfindingStateMachine(RobotStateMachine currentState, RobotStateMachine nextState) {
+void StudentsRobot::PathfindingStateMachine(RobotStateMachine currentState,
+		RobotStateMachine nextState) {
 	static int path_state = 0;
 	static Node* current;
 	switch (path_state) {
@@ -245,6 +282,7 @@ void StudentsRobot::PathfindingStateMachine(RobotStateMachine currentState, Robo
 			current = path.front();
 			path.pop_front();
 			degrees = determineNextTurn(current, path.front());
+			path.push_front(current);
 			status = WAIT_FOR_TURN;
 			nextStatus = currentState;
 			path_state = 1;
@@ -254,9 +292,18 @@ void StudentsRobot::PathfindingStateMachine(RobotStateMachine currentState, Robo
 		break;
 	case 1:
 		//TODO: Perform scanning operations & update path
+		status = SCAN_LEFT;
+		nextStatus = currentState;
 		path_state = 2;
 		break;
 	case 2:
+		path_state = interpretAdjData();
+		clearAdjencies();
+
+		break;
+	case 3:
+		path.pop_front();
+
 		targetDist = chassis->distanceToWheelAngle(410);
 		status = WAIT_FOR_DISTANCE;
 		nextStatus = currentState;
@@ -267,18 +314,81 @@ void StudentsRobot::PathfindingStateMachine(RobotStateMachine currentState, Robo
 
 int StudentsRobot::determineNextTurn(Node* current, Node* next) {
 
-	if (current->nodes[0] == next)
+	if (current->nodes[0] == next) {
+		cardinalDirection = 0;
 		return 0;
-	else if (current->nodes[1] == next)
+	} else if (current->nodes[1] == next) {
+		cardinalDirection = 1;
 		return 90;
-	else if (current->nodes[2] == next)
+	} else if (current->nodes[2] == next) {
+		cardinalDirection = 2;
 		return 180;
-	else
+	} else {
+		cardinalDirection = 3;
 		return 270;
+	}
 }
 
 bool StudentsRobot::reachedDestination() {
 	if (path.size() == 1)
 		return true;
 	return false;
+}
+
+int StudentsRobot::readUltrasonic() {
+	long duration, distance;
+	digitalWrite(US_TRIG_PIN, LOW);
+	delayMicroseconds(2);
+	digitalWrite(US_TRIG_PIN, HIGH);
+	delayMicroseconds(10);
+	digitalWrite(US_TRIG_PIN, LOW);
+	duration = pulseIn(US_ECHO_PIN, HIGH);
+	distance = (duration / 2) / 29.1;
+
+	return (int) distance;
+}
+
+bool StudentsRobot::readIRDetector() {
+	//TODO actually read IR Detector
+	return false;
+}
+
+
+void StudentsRobot::clearAdjencies() {
+	for (int i = 0; i < 4; i++) {
+		adjacencies[i] = 0;
+	}
+}
+
+int StudentsRobot::interpretAdjData() {
+	for (int i = 0; i < 4; i++) {
+		if (adjacencies[i] == 1) {
+			Node* adj = path.front()->nodes[i];
+			if (adj->street) {
+				adj->street = false;
+
+				if (i == cardinalDirection) {
+					Node* current = path.front();
+					path.pop_front();
+					path.pop_front();
+					Node* target = path.front();
+
+					list<Node*> newPath = pathfinder->pathfind(current, target);
+					path = pathfinder->pushListBack(newPath, path);
+
+					return 0;
+				}
+
+			} else if (adj->buildingLot) {
+				adj->buildingLot = false;
+				adj->building = true;
+
+				path = pathfinder->addBuildingSearch(path, adj);
+
+				return 0;
+
+			}
+		}
+	}
+	return 3;
 }

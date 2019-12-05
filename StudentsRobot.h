@@ -36,8 +36,10 @@ enum RobotStateMachine {
 	WAIT_FOR_MOTORS_TO_FINNISH,
 	WAIT_FOR_TIME,
 	WAIT_FOR_TURN,
-	WAIT_FOR_DISTANCE
-
+	WAIT_FOR_DISTANCE,
+	SCAN_LEFT,
+	SCAN_MIDDLE,
+	SCAN_RIGHT
 };
 /**
  * @enum ComStackStatusState
@@ -85,6 +87,10 @@ private:
 	float track = 251.5; //227 mm
 	float velocity = 200;
 	float degrees = 0;
+	int cardinalDirection = 0;
+	Servo UltraSonicServo;
+	int adjacencies[4];
+
 public:
 	/**
 	 * Constructor for StudentsRobot
@@ -125,6 +131,10 @@ public:
 	void PathfindingStateMachine(RobotStateMachine currentState, RobotStateMachine nextState);
 	int determineNextTurn(Node* current, Node* next);
 	bool reachedDestination();
+	int readUltrasonic();
+	void clearAdjencies();
+	int interpretAdjData();
+	bool readIRDetector();
 };
 
 #endif /* STUDENTSROBOT_H_ */
