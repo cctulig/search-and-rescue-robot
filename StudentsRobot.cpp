@@ -127,9 +127,9 @@ void StudentsRobot::updateStateMachine() {
 		//path = pathfinder->pathFindTest(0, 0, 4, 4);
 		path = pathfinder->generateInitialPath();
 		/*path.pop_front();
-		path.pop_front();
-		path = pathfinder->addBuildingSearch(path, path.front()->nodes[0]);
-		pathfinder->printNodes(path);*/
+		 path.pop_front();
+		 path = pathfinder->addBuildingSearch(path, path.front()->nodes[0]);
+		 pathfinder->printNodes(path);*/
 
 		/*
 		 motor1->setVelocityDegreesPerSecond(-150);
@@ -210,29 +210,44 @@ void StudentsRobot::updateStateMachine() {
 		}
 		break;
 	case SCAN_LEFT:
-		if (UltraSonicServo.read() < 1) {
-			if (readUltrasonic() > 10) {
-				int adj = (cardinalDirection - 1) % 4;
-				adjacencies[adj] = 1;
-			}
-
-			UltraSonicServo.write(90);
-			status = SCAN_MIDDLE;
+		if (!path.front()->nodes[(cardinalDirection - 1) % 4]->street) {
+			adjacencies[(cardinalDirection - 1) % 4] = 1;
 		}
+		status = SCAN_MIDDLE;
+
+		/*if (UltraSonicServo.read() < 1) {
+		 if (readUltrasonic() > 10) {
+		 int adj = (cardinalDirection - 1) % 4;
+		 adjacencies[adj] = 1;
+		 }
+
+		 UltraSonicServo.write(90);
+		 status = SCAN_MIDDLE;
+		 }*/
 		break;
 	case SCAN_MIDDLE:
-		if (UltraSonicServo.read() > 89 && UltraSonicServo.read() < 91) {
-			if (readUltrasonic() > 10) {
-				int adj = cardinalDirection;
-				adjacencies[adj] = 1;
-			}
-
-			UltraSonicServo.write(180);
-			status = SCAN_RIGHT;
+		if (!path.front()->nodes[cardinalDirection]->street) {
+			adjacencies[cardinalDirection] = 1;
 		}
+		status = SCAN_RIGHT;
+
+		/*if (UltraSonicServo.read() > 89 && UltraSonicServo.read() < 91) {
+		 if (readUltrasonic() > 10) {
+		 int adj = cardinalDirection;
+		 adjacencies[adj] = 1;
+		 }
+
+		 UltraSonicServo.write(180);
+		 status = SCAN_RIGHT;
+		 }*/
 		break;
 	case SCAN_RIGHT:
-		if (UltraSonicServo.read() > 179) {
+		if (!path.front()->nodes[(cardinalDirection + 1) % 4]->street) {
+			adjacencies[(cardinalDirection + 1) % 4] = 1;
+		}
+		status = nextStatus;
+
+		/*if (UltraSonicServo.read() > 179) {
 			if (readUltrasonic() > 10) {
 				int adj = (cardinalDirection + 1) % 4;
 				adjacencies[adj] = 1;
@@ -240,7 +255,7 @@ void StudentsRobot::updateStateMachine() {
 
 			UltraSonicServo.write(0);
 			status = nextStatus;
-		}
+		}*/
 		break;
 	case Halting:
 		// save state and enter safe mode
@@ -249,6 +264,8 @@ void StudentsRobot::updateStateMachine() {
 		motor3->stop();
 		motor2->stop();
 		motor1->stop();
+
+		pathfinder->printNodes(path);
 
 		status = Halt;
 		break;
@@ -352,7 +369,6 @@ bool StudentsRobot::readIRDetector() {
 	//TODO actually read IR Detector
 	return false;
 }
-
 
 void StudentsRobot::clearAdjencies() {
 	for (int i = 0; i < 4; i++) {
