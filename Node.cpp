@@ -22,10 +22,3 @@ void Node::setAdjencies(Node *N, Node *E, Node *S, Node *W) {
 	nodes[3] = W;
 }
 
-void Node::setType(bool isStreet) {
-	street = isStreet;
-}
-
-bool Node::isStreet() {
-	return street;
-}
