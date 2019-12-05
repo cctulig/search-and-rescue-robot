@@ -65,10 +65,10 @@
 #define STEPPER_STEP      32
 
 // Sensor Pins
-#define ANALOG_SENSE_ONE		36
-#define ANALOG_SENSE_TWO		39
-#define ANALOG_SENSE_THREE		34
-#define ANALOG_SENSE_FOUR		35
+#define US_TRIG_PIN				36 //TRIG
+#define ULTRASONIC_SERVO_PIN	39 //SERVO
+#define ANALOG_SENSE_THREE		34 //SERVO
+#define US_ECHO_PIN				35 //ECHO
 
 // Pins used by a perpheral, may be re-used
 #define BOOT_FLAG_PIN 			0
