@@ -82,13 +82,14 @@ private:
 	Pathfinder * pathfinder;
 
 	list<Node*> path;
+	list<Node*> visited_path;
 	float targetDist;
 	float radius = 28.2; //27.4 mm
 	float track = 251.5; //227 mm
 	float velocity = 200;
 	float degrees = 0;
 	int cardinalDirection = 0;
-	Servo UltraSonicServo;
+	//Servo UltraSonicServo;
 	int adjacencies[4];
 
 public:

@@ -20,6 +20,7 @@ public:
 	int yPos;
 
 	bool street = true;
+	bool roadBlock = false;
 	bool buildingLot = false;
 	bool building = false;
 	bool hasChecked = false;

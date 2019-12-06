@@ -81,11 +81,6 @@ void Pathfinder::createNodes() {
 			nodes[x][y] = new Node(true);
 			nodes[x][y].xPos = x;
 			nodes[x][y].yPos = y;
-			Serial.print("(");
-			Serial.print(nodes[x][y].xPos);
-			Serial.print(",");
-			Serial.print(nodes[x][y].yPos);
-			Serial.println(")");
 		}
 	}
 }
@@ -160,8 +155,11 @@ list<Node*> Pathfinder::pathFindTest(int startX, int startY, int endX,
 
 void Pathfinder::addBuildingsAndRoadBlock() {
 	nodes[3][1].street = false;
+	nodes[3][1].roadBlock = true;
 
-	nodes[1][2].
+	nodes[1][2].building = true;
+	nodes[1][4].building = true;
+	nodes[5][0].building = true;
 }
 
 
@@ -173,6 +171,8 @@ list<Node*> Pathfinder::generateInitialPath() {
 	path.push_back(&nodes[1][1]);
 	path.push_back(&nodes[2][1]);
 	path.push_back(&nodes[3][1]);
+	path.push_back(&nodes[4][1]);
+	path.push_back(&nodes[4][0]);
 	path.push_back(&nodes[4][1]);
 	path.push_back(&nodes[4][2]);
 	path.push_back(&nodes[4][3]);
