@@ -143,10 +143,10 @@ void DrivingChassis::DriveStraight(int targetVel, float degrees) {
 	float velAdj = IMU_err;
 	//Serial.println(err_total);
 
-	if (velAdj > 50)
-		velAdj = 50;
-	if (velAdj < -50)
-		velAdj = -50;
+	if (velAdj > 60)
+		velAdj = 60;
+	if (velAdj < -60)
+		velAdj = -60;
 
 	myleft->setVelocityDegreesPerSecond(-(targetVel - velAdj));
 	myright->setVelocityDegreesPerSecond(targetVel + velAdj);
@@ -172,21 +172,44 @@ bool DrivingChassis::Turn(float degrees) {
 	if (velAdj < -50)
 		velAdj = -50;
 
-	if(IMU_err < 4 && IMU_err > -4) {
+	if (IMU_err < 4 && IMU_err > -4) {
 		return true;
 	}
 
-	if(IMU_err > 0) {
+	if (IMU_err > 0) {
 		direction = 1;
-	}
-	else {
+	} else {
 		direction = -1;
 	}
 
-
-	myleft->setVelocityDegreesPerSecond((150 )*direction);
+	myleft->setVelocityDegreesPerSecond((150) * direction);
 	Serial.println(myleft->getVelocityDegreesPerSecond());
-	myright->setVelocityDegreesPerSecond((150 )*direction);
+	myright->setVelocityDegreesPerSecond((150) * direction);
 	return false;
 }
 
+bool DrivingChassis::TurnBetter(float degrees) {
+	target_heading = degrees;
+
+
+	int IMU_heading =  (int)(IMU->getEULER_azimuth() - IMU_offsett) % 360;
+
+	float IMU_err = target_heading - IMU_heading;
+
+	if (IMU_err < 2 && IMU_err > -2) {
+		return true;
+	}
+	Serial.println(target_heading);
+	Serial.println(IMU_heading);
+
+	int direction = 1;
+	if (target_heading < IMU_heading) {
+		direction = 1;
+	} else {
+		direction = -1;
+	}
+
+	myleft->setVelocityDegreesPerSecond(150 * direction);
+	myright->setVelocityDegreesPerSecond(150 * direction);
+	return false;
+}

@@ -131,6 +131,7 @@ public:
 
 	void DriveStraight(int targetVel, float degrees);
 	bool Turn(float degrees);
+	bool TurnBetter(float degrees);
 
 };
 
