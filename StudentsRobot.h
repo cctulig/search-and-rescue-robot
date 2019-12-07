@@ -20,7 +20,6 @@
 #include "src/commands/GetIMU.h"
 #include "Pathfinder.h"
 
-
 /**
  * @enum RobotStateMachine
  * These are sample values for a sample state machine.
@@ -30,6 +29,7 @@ enum RobotStateMachine {
 	StartupRobot,
 	StartRunning,
 	Running,
+	StartPath,
 	Pathfinding,
 	Halting,
 	Halt,
@@ -89,7 +89,7 @@ private:
 	float velocity = 200;
 	float degrees = 0;
 	int cardinalDirection = 0;
-	//Servo UltraSonicServo;
+	Servo UltraSonicServo;
 	int adjacencies[4];
 
 public:
@@ -129,13 +129,16 @@ public:
 	 */
 	void updateStateMachine();
 
-	void PathfindingStateMachine(RobotStateMachine currentState, RobotStateMachine nextState);
+	void PathfindingStateMachine(RobotStateMachine currentState,
+			RobotStateMachine nextState);
 	int determineNextTurn(Node* current, Node* next);
 	bool reachedDestination();
 	int readUltrasonic();
 	void clearAdjencies();
 	int interpretAdjData();
 	bool readIRDetector();
+	void InitialDrive(RobotStateMachine currentState,
+			RobotStateMachine nextState);
 };
 
 #endif /* STUDENTSROBOT_H_ */

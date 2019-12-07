@@ -92,15 +92,16 @@ StudentsRobot::StudentsRobot(PIDMotor * motor1, PIDMotor * motor2,
 	pinMode(WII_CONTROLLER_DETECT, OUTPUT);
 	chassis = new DrivingChassis(motor1, motor2, track, radius, IMU);
 	pathfinder = new Pathfinder();
-	//UltraSonicServo.attach(ULTRASONIC_SERVO_PIN);
-	//pinMode(US_TRIG_PIN, OUTPUT);
-	//pinMode(US_ECHO_PIN, INPUT);
+	UltraSonicServo.attach(ULTRASONIC_SERVO_PIN);
+	pinMode(US_TRIG_PIN, OUTPUT);
+	pinMode(US_ECHO_PIN, INPUT);
 }
 /**
  * Seperate from running the motor control,
  * update the state machine for running the final project code here
  */
 void StudentsRobot::updateStateMachine() {
+	int distance;
 	digitalWrite(WII_CONTROLLER_DETECT, 1);
 	long now = millis();
 	chassis->loop();
@@ -131,8 +132,7 @@ void StudentsRobot::updateStateMachine() {
 		 path.pop_front();
 		 path = pathfinder->addBuildingSearch(path, path.front()->nodes[0]); */
 		//pathfinder->printNodes(path);
-		pathfinder->addBuildingsAndRoadBlock();
-
+		//pathfinder->addBuildingsAndRoadBlock();
 		/*
 		 motor1->setVelocityDegreesPerSecond(-150);
 		 motor2->setVelocityDegreesPerSecond(333);
@@ -143,6 +143,7 @@ void StudentsRobot::updateStateMachine() {
 		//arc: 670.8f, m1 = 150, m2 = -333
 		//chassis->DriveStraight(200);
 		//targetDist = chassis->distanceToWheelAngle(1000);
+		//UltraSonicServo.write(90); //0, 180
 		status = Running; // set the state machine to wait for the motors to finish
 		nextStatus = Halting; // the next status to move to when the motors finish
 		startTime = now + 1000; // the motors should be done in 1000 ms
@@ -154,12 +155,14 @@ void StudentsRobot::updateStateMachine() {
 		status = WAIT_FOR_TIME;
 		nextTime = nextTime + 100; // ensure no timer drift by incremeting the target
 		// After 1000 ms, come back to this state
-		nextStatus = Pathfinding;
+		nextStatus = StartPath;
 		//motor1->setVelocityDegreesPerSecond(30);
 		//Serial.println(motor1->getAngleDegrees());
 		//Serial.println(motor2->getAngleDegrees());
 
 		//int reading = readUltrasonic();
+		//Serial.println(readUltrasonic());
+		//Serial.println(UltraSonicServo.read());
 
 		// Do something
 		if (!digitalRead(BOOT_FLAG_PIN)) {
@@ -173,6 +176,9 @@ void StudentsRobot::updateStateMachine() {
 #endif
 
 		}
+		break;
+	case StartPath:
+		InitialDrive(StartPath, Pathfinding);
 		break;
 	case Pathfinding:
 		PathfindingStateMachine(Pathfinding, Halting);
@@ -215,52 +221,59 @@ void StudentsRobot::updateStateMachine() {
 		}
 		break;
 	case SCAN_LEFT:
-		if (!path.front()->nodes[(cardinalDirection + 3) % 4]->street) {
-			adjacencies[(cardinalDirection + 3) % 4] = 1;
-		}
-		status = SCAN_MIDDLE;
-
-		/*if (UltraSonicServo.read() < 1) {
-		 if (readUltrasonic() > 10) {
-		 int adj = (cardinalDirection - 1) % 4;
-		 adjacencies[adj] = 1;
+		/*if (!path.front()->nodes[(cardinalDirection + 3) % 4]->street) {
+		 adjacencies[(cardinalDirection + 3) % 4] = 1;
 		 }
+		 status = SCAN_MIDDLE;*/
 
-		 UltraSonicServo.write(90);
-		 status = SCAN_MIDDLE;
-		 }*/
+		distance = readUltrasonic();
+		Serial.println(distance);
+		if (distance > 20 && distance < 35) {
+			Serial.print("Building left");
+			int adj = (cardinalDirection - 1) % 4;
+			adjacencies[adj] = 1;
+		}
+
+		UltraSonicServo.write(90);
+		nextTime = millis() + 500;
+		status = WAIT_FOR_TIME;
+		nextStatus = SCAN_MIDDLE;
+
 		break;
 	case SCAN_MIDDLE:
-		if (!path.front()->nodes[cardinalDirection]->street) {
-			adjacencies[cardinalDirection] = 1;
-		}
-		status = SCAN_RIGHT;
-
-		/*if (UltraSonicServo.read() > 89 && UltraSonicServo.read() < 91) {
-		 if (readUltrasonic() > 10) {
-		 int adj = cardinalDirection;
-		 adjacencies[adj] = 1;
+		/*if (!path.front()->nodes[cardinalDirection]->street) {
+		 adjacencies[cardinalDirection] = 1;
 		 }
+		 status = SCAN_RIGHT;*/
 
-		 UltraSonicServo.write(180);
-		 status = SCAN_RIGHT;
-		 }*/
+		distance = readUltrasonic();
+		Serial.println(distance);
+		if (distance > 20 && distance < 35) {
+			Serial.print("road block middle");
+			int adj = cardinalDirection;
+			adjacencies[adj] = 1;
+		}
+		nextTime = millis() + 500;
+		UltraSonicServo.write(180);
+		status = WAIT_FOR_TIME;
+		nextStatus = SCAN_RIGHT;
 		break;
 	case SCAN_RIGHT:
-		if (!path.front()->nodes[(cardinalDirection + 1) % 4]->street) {
-			adjacencies[(cardinalDirection + 1) % 4] = 1;
-		}
-		status = nextStatus;
-
-		/*if (UltraSonicServo.read() > 179) {
-		 if (readUltrasonic() > 10) {
-		 int adj = (cardinalDirection + 1) % 4;
-		 adjacencies[adj] = 1;
+		/*if (!path.front()->nodes[(cardinalDirection + 1) % 4]->street) {
+		 adjacencies[(cardinalDirection + 1) % 4] = 1;
 		 }
+		 status = nextStatus;*/
 
-		 UltraSonicServo.write(0);
-		 status = nextStatus;
-		 }*/
+		distance = readUltrasonic();
+		Serial.println(distance);
+		if (distance > 20 && distance < 35) {
+			Serial.print("Building right");
+			int adj = (cardinalDirection + 1) % 4;
+			adjacencies[adj] = 1;
+		}
+
+		UltraSonicServo.write(0);
+		status = Pathfinding;
 		break;
 	case Halting:
 		// save state and enter safe mode
@@ -294,6 +307,32 @@ void StudentsRobot::pidLoop() {
 	motor3->loop();
 }
 
+void StudentsRobot::InitialDrive(RobotStateMachine currentState,
+		RobotStateMachine nextState) {
+	static int start_state = 0;
+	switch (start_state) {
+	case 0:
+		targetDist = chassis->distanceToWheelAngle(430);
+		status = WAIT_FOR_DISTANCE;
+		nextStatus = currentState;
+		start_state = 1;
+		break;
+	case 1:
+		degrees = 90;
+		cardinalDirection = 1;
+		status = WAIT_FOR_TURN;
+		nextStatus = currentState;
+		start_state = 2;
+		break;
+	case 2:
+		targetDist = chassis->distanceToWheelAngle(90);
+		status = WAIT_FOR_DISTANCE;
+		nextStatus = nextState;
+		start_state = 0;
+		break;
+	}
+}
+
 void StudentsRobot::PathfindingStateMachine(RobotStateMachine currentState,
 		RobotStateMachine nextState) {
 	static int path_state = 0;
@@ -304,7 +343,7 @@ void StudentsRobot::PathfindingStateMachine(RobotStateMachine currentState,
 		if (!reachedDestination()) {
 			current = path.front();
 			path.pop_front();
-			degrees = determineNextTurn(current, path.front());
+			degrees += determineNextTurn(current, path.front());
 			path.push_front(current);
 
 			status = WAIT_FOR_TURN;
@@ -316,7 +355,7 @@ void StudentsRobot::PathfindingStateMachine(RobotStateMachine currentState,
 		break;
 	case 1:
 		//TODO: Perform scanning operations & update path
-
+		UltraSonicServo.write(0);
 		status = SCAN_LEFT;
 		nextStatus = currentState;
 		path_state = 2;
@@ -344,21 +383,18 @@ void StudentsRobot::PathfindingStateMachine(RobotStateMachine currentState,
 }
 
 int StudentsRobot::determineNextTurn(Node* current, Node* next) {
+	int turn = current->findAdj(next) * 90 - cardinalDirection * 90;
+	if (turn == 270)
+		turn = -90;
+	else if (turn == -270)
+		turn = 90;
+	cardinalDirection = current->findAdj(next);
+	if (turn > 0)
+		chassis->IMU_offsett -= 2;
+	else if (turn < 0)
+		chassis->IMU_offsett += 2;
 
-	if (current->nodes[0] == next) {
-		cardinalDirection = 0;
-		return 0;
-	} else if (current->nodes[1] == next) {
-		cardinalDirection = 1;
-		return 90;
-	} else if (current->nodes[2] == next) {
-		cardinalDirection = 2;
-		return 180;
-	} else {
-		cardinalDirection = 3;
-		return 270;
-
-	}
+	return turn;
 }
 
 bool StudentsRobot::reachedDestination() {
@@ -395,7 +431,7 @@ int StudentsRobot::interpretAdjData() {
 	for (int i = 0; i < 4; i++) {
 		if (adjacencies[i] == 1) {
 			Node* adj = path.front()->nodes[i];
-			if (!adj->street && adj->roadBlock) { //TODO remove roadblock
+			if (adj->street) { //TODO remove roadblock
 				Serial.println("found road block");
 				adj->street = false;
 
@@ -413,7 +449,7 @@ int StudentsRobot::interpretAdjData() {
 					return 0;
 				}
 
-			} else if (adj->buildingLot && adj->building) { //TODO get rid of building
+			} else if (adj->buildingLot) { //TODO get rid of building
 				Serial.println("pathfinding around building");
 
 				adj->buildingLot = false;
