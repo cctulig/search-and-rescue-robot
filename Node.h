@@ -26,6 +26,7 @@ public:
 	bool hasChecked = false;
 
 	void setAdjencies(Node *N, Node *E, Node *S, Node *W);
+	int findAdj(Node* adj);
 };
 
 #endif /* NODE_H_ */

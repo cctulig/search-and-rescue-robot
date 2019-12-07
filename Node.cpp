@@ -22,3 +22,13 @@ void Node::setAdjencies(Node *N, Node *E, Node *S, Node *W) {
 	nodes[3] = W;
 }
 
+int Node::findAdj(Node* adj){
+	for(int i = 0; i < 4; i++) {
+		if(nodes[i] == adj) {
+			return i;
+		}
+	}
+	return 0;
+}
+
+
