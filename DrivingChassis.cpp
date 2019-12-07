@@ -133,14 +133,14 @@ void DrivingChassis::DriveStraight(int targetVel, float degrees) {
 	target_heading = degrees;
 	float IMU_heading = IMU->getEULER_azimuth() - IMU_offsett;
 	float curr_heading = pose->theta * 360 / 2 / 3.14;
-	Serial.println(IMU_offsett);
-	Serial.println(IMU->getEULER_azimuth());
+	//Serial.println(IMU_offsett);
+	//Serial.println(IMU->getEULER_azimuth());
 
 	float err = target_heading - curr_heading;
 	float IMU_err = target_heading - IMU_heading;
 
 	float err_total = -(.9f * IMU_err + .1f * err);
-	float velAdj = IMU_err;
+	float velAdj = IMU_err * IMU_kp;
 	//Serial.println(err_total);
 
 	if (velAdj > 60)
@@ -165,7 +165,7 @@ bool DrivingChassis::Turn(float degrees) {
 
 	float err_total = -(.9f * IMU_err + .1f * err);
 	float velAdj = IMU_err;
-	Serial.println(IMU_err);
+	//Serial.println(IMU_err);
 
 	if (velAdj > 50)
 		velAdj = 50;
@@ -183,7 +183,7 @@ bool DrivingChassis::Turn(float degrees) {
 	}
 
 	myleft->setVelocityDegreesPerSecond((150) * direction);
-	Serial.println(myleft->getVelocityDegreesPerSecond());
+	//Serial.println(myleft->getVelocityDegreesPerSecond());
 	myright->setVelocityDegreesPerSecond((150) * direction);
 	return false;
 }
@@ -192,24 +192,24 @@ bool DrivingChassis::TurnBetter(float degrees) {
 	target_heading = degrees;
 
 
-	int IMU_heading =  (int)(IMU->getEULER_azimuth() - IMU_offsett) % 360;
+	float IMU_heading = (IMU->getEULER_azimuth() - IMU_offsett);
 
 	float IMU_err = target_heading - IMU_heading;
 
 	if (IMU_err < 2 && IMU_err > -2) {
 		return true;
 	}
-	Serial.println(target_heading);
-	Serial.println(IMU_heading);
+	//Serial.println(target_heading);
+	//Serial.println(IMU_heading);
 
-	int direction = 1;
+	int direction = -1;
 	if (target_heading < IMU_heading) {
-		direction = 1;
-	} else {
 		direction = -1;
+	} else {
+		direction = 1;
 	}
 
-	myleft->setVelocityDegreesPerSecond(150 * direction);
-	myright->setVelocityDegreesPerSecond(150 * direction);
+	myleft->setVelocityDegreesPerSecond(100 * direction);
+	myright->setVelocityDegreesPerSecond(100 * direction);
 	return false;
 }

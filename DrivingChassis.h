@@ -38,9 +38,9 @@ private:
 	unsigned long lastTimestamp = 0;
 	bool set_offset = false;
 	int cycle =0;
-	float IMU_offsett = 0;
 
 public:
+	float IMU_offsett = 0;
 	/**
 	 * Compute a delta in wheel angle to traverse a specific distance
 	 *
