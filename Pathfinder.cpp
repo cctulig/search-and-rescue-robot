@@ -166,7 +166,7 @@ void Pathfinder::addBuildingsAndRoadBlock() {
 list<Node*> Pathfinder::generateInitialPath() {
 	list<Node*> path;
 
-	path.push_back(&nodes[0][0]);
+	//path.push_back(&nodes[0][0]);
 	path.push_back(&nodes[0][1]);
 	path.push_back(&nodes[1][1]);
 	path.push_back(&nodes[2][1]);
@@ -176,9 +176,17 @@ list<Node*> Pathfinder::generateInitialPath() {
 	path.push_back(&nodes[4][1]);
 	path.push_back(&nodes[4][2]);
 	path.push_back(&nodes[4][3]);
+	path.push_back(&nodes[5][3]);
+	path.push_back(&nodes[4][3]);
 	path.push_back(&nodes[3][3]);
 	path.push_back(&nodes[2][3]);
 	path.push_back(&nodes[1][3]);
+	path.push_back(&nodes[0][3]);
+	path.push_back(&nodes[0][2]);
+	path.push_back(&nodes[0][1]);
+	path.push_back(&nodes[0][0]);
+
+
 
 	return path;
 }
