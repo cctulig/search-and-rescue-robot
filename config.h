@@ -20,6 +20,8 @@
  * Gripper pin for Servo
  */
 #define SERVO_PIN 23
+#define ULTRASONIC_SERVO_PIN	25 //SERVO
+
 /**
  * Enable for all h-bridges
  */
@@ -65,10 +67,10 @@
 #define STEPPER_STEP      32
 
 // Sensor Pins
-#define US_TRIG_PIN				36 //TRIG
-#define ULTRASONIC_SERVO_PIN	39 //SERVO
-#define ANALOG_SENSE_THREE		34 //SERVO
-#define US_ECHO_PIN				35 //ECHO
+#define US_TRIG_PIN				14 //TRIG
+#define ANALOG_SENSE_THREE		36
+#define US_ECHO_PIN				27 //ECHO
+//39 is also a possible pin.
 
 // Pins used by a perpheral, may be re-used
 #define BOOT_FLAG_PIN 			0
