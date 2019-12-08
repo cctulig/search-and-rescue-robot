@@ -19,8 +19,9 @@
 /**
  * Gripper pin for Servo
  */
-#define SERVO_PIN 23
-#define ULTRASONIC_SERVO_PIN	25 //SERVO
+#define SERVO_PIN				23
+#define IR_SERVO_PIN			23
+#define ULTRASONIC_SERVO_PIN	25
 
 /**
  * Enable for all h-bridges

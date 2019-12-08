@@ -33,13 +33,16 @@ enum RobotStateMachine {
 	Pathfinding,
 	Halting,
 	Halt,
+	WAIT_FOR_STEPPER,
 	WAIT_FOR_MOTORS_TO_FINNISH,
 	WAIT_FOR_TIME,
 	WAIT_FOR_TURN,
 	WAIT_FOR_DISTANCE,
 	SCAN_LEFT,
 	SCAN_MIDDLE,
-	SCAN_RIGHT
+	SCAN_RIGHT,
+	SCAN_LEFT_IR,
+	SCAN_RIGHT_IR
 };
 /**
  * @enum ComStackStatusState
@@ -89,8 +92,14 @@ private:
 	float velocity = 200;
 	float degrees = 0;
 	int cardinalDirection = 0;
+	Servo IR_SERVO;
 	Servo UltraSonicServo;
 	int adjacencies[4];
+
+	bool stepped = true;
+	int stepper_target = 0;
+	int stepper_counter = 0;
+
 
 public:
 	/**

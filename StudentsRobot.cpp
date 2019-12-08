@@ -93,8 +93,11 @@ StudentsRobot::StudentsRobot(PIDMotor * motor1, PIDMotor * motor2,
 	chassis = new DrivingChassis(motor1, motor2, track, radius, IMU);
 	pathfinder = new Pathfinder();
 	UltraSonicServo.attach(ULTRASONIC_SERVO_PIN);
+	IR_SERVO.attach(IR_SERVO_PIN);
 	pinMode(US_TRIG_PIN, OUTPUT);
 	pinMode(US_ECHO_PIN, INPUT);
+	pinMode(STEPPER_STEP, OUTPUT);
+	pinMode(STEPPER_DIRECTION, OUTPUT);
 }
 /**
  * Seperate from running the motor control,
@@ -121,6 +124,7 @@ void StudentsRobot::updateStateMachine() {
 		//motor2->startInterpolationDegrees(720, 1000, SIN);
 		//motor3->startInterpolationDegrees(motor3->getAngleDegrees(), 1000, SIN);
 
+		digitalWrite(STEPPER_DIRECTION, LOW);
 		motor1->overrideCurrentPosition(0);
 		motor2->overrideCurrentPosition(0);
 		chassis->pose->reset();
@@ -152,10 +156,15 @@ void StudentsRobot::updateStateMachine() {
 	case Running:
 		// Set up a non-blocking 1000 ms delay
 		Serial.println("running");
+		//IR_SERVO.write(15); //15, 170
+		//UltraSonicServo.write(0);
+		//Serial.println(IR_SERVO.read());
+
+		stepper_target = 200;
 		status = WAIT_FOR_TIME;
 		nextTime = nextTime + 100; // ensure no timer drift by incremeting the target
 		// After 1000 ms, come back to this state
-		nextStatus = StartPath;
+		nextStatus = StartPath; //StartPath
 		//motor1->setVelocityDegreesPerSecond(30);
 		//Serial.println(motor1->getAngleDegrees());
 		//Serial.println(motor2->getAngleDegrees());
@@ -209,6 +218,25 @@ void StudentsRobot::updateStateMachine() {
 			nextTime = millis() + 200;
 		}
 		break;
+	case WAIT_FOR_STEPPER:
+		stepper_counter++;
+		Serial.println(stepper_counter);
+		stepped = !stepped;
+
+		if (stepped)
+			digitalWrite(STEPPER_STEP, HIGH);
+		else
+			digitalWrite(STEPPER_STEP, LOW);
+
+		nextTime = millis() + 5;
+		status = WAIT_FOR_TIME;
+		nextStatus = WAIT_FOR_STEPPER;
+
+		if (stepper_counter >= stepper_target) {
+			stepper_counter = 0;
+			status = Halting;
+		}
+		break;
 	case WAIT_FOR_TURN:
 		if (chassis->TurnBetter(degrees)) {
 			status = WAIT_FOR_TIME;
@@ -225,6 +253,7 @@ void StudentsRobot::updateStateMachine() {
 		 adjacencies[(cardinalDirection + 3) % 4] = 1;
 		 }
 		 status = SCAN_MIDDLE;*/
+		nextStatus = SCAN_MIDDLE;
 
 		distance = readUltrasonic();
 		Serial.println(distance);
@@ -232,19 +261,18 @@ void StudentsRobot::updateStateMachine() {
 			Serial.print("Building left");
 			int adj = (cardinalDirection - 1) % 4;
 			adjacencies[adj] = 1;
+			IR_SERVO.write(15);
+			nextStatus = SCAN_LEFT_IR;
 		}
 
 		UltraSonicServo.write(90);
 		nextTime = millis() + 500;
 		status = WAIT_FOR_TIME;
-		nextStatus = SCAN_MIDDLE;
-
 		break;
 	case SCAN_MIDDLE:
-		/*if (!path.front()->nodes[cardinalDirection]->street) {
-		 adjacencies[cardinalDirection] = 1;
-		 }
-		 status = SCAN_RIGHT;*/
+		if (!path.front()->nodes[cardinalDirection]->street) {
+			adjacencies[cardinalDirection] = 1;
+		}
 
 		distance = readUltrasonic();
 		Serial.println(distance);
@@ -263,6 +291,7 @@ void StudentsRobot::updateStateMachine() {
 		 adjacencies[(cardinalDirection + 1) % 4] = 1;
 		 }
 		 status = nextStatus;*/
+		status = Pathfinding;
 
 		distance = readUltrasonic();
 		Serial.println(distance);
@@ -270,9 +299,27 @@ void StudentsRobot::updateStateMachine() {
 			Serial.print("Building right");
 			int adj = (cardinalDirection + 1) % 4;
 			adjacencies[adj] = 1;
+			IR_SERVO.write(170);
+			nextStatus = SCAN_RIGHT_IR;
+			status = WAIT_FOR_TIME;
+			nextTime = millis() + 500;
 		}
 
 		UltraSonicServo.write(0);
+		break;
+	case SCAN_LEFT_IR:
+		if (readIRDetector()) {
+			//TODO path back home
+		}
+		nextTime = millis() + 500;
+		UltraSonicServo.write(90);
+		status = WAIT_FOR_TIME;
+		nextStatus = SCAN_MIDDLE;
+		break;
+	case SCAN_RIGHT_IR:
+		if (readIRDetector()) {
+			//TODO path back home
+		}
 		status = Pathfinding;
 		break;
 	case Halting:
@@ -431,9 +478,10 @@ int StudentsRobot::interpretAdjData() {
 	for (int i = 0; i < 4; i++) {
 		if (adjacencies[i] == 1) {
 			Node* adj = path.front()->nodes[i];
-			if (adj->street) { //TODO remove roadblock
+			if (adj->street || adj->roadBlock) { //TODO remove roadblock
 				Serial.println("found road block");
 				adj->street = false;
+				adj->roadBlock = true;
 
 				if (i == cardinalDirection) {
 					Serial.println("pathfinding around road block");
