@@ -33,6 +33,7 @@ public:
 	list<Node*> generateInitialPath();
 	list<Node*> addBuildingSearch(list<Node*> final_path, Node* building);
 	list<Node*> pushListBack(list<Node*> orig, list<Node*> added);
+	Node* getNode(int x, int y);
 };
 
 #endif /* PATHFINDER_H_ */

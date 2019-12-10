@@ -98,6 +98,11 @@ StudentsRobot::StudentsRobot(PIDMotor * motor1, PIDMotor * motor2,
 	pinMode(US_ECHO_PIN, INPUT);
 	pinMode(STEPPER_STEP, OUTPUT);
 	pinMode(STEPPER_DIRECTION, OUTPUT);
+	pinMode(FILTER, ANALOG);
+
+	lcd = new LiquidCrystal_I2C(0x27, 20, 4);
+	lcd->begin(20, 4); // sixteen characters across - 2 lines
+	lcd->backlight();
 }
 /**
  * Seperate from running the motor control,
@@ -108,6 +113,8 @@ void StudentsRobot::updateStateMachine() {
 	digitalWrite(WII_CONTROLLER_DETECT, 1);
 	long now = millis();
 	chassis->loop();
+	lcd->setCursor(0, 1);
+
 	switch (status) {
 	case StartupRobot:
 		//Do this once at startup
@@ -160,11 +167,13 @@ void StudentsRobot::updateStateMachine() {
 		//UltraSonicServo.write(0);
 		//Serial.println(IR_SERVO.read());
 
+		//Serial.println(analogRead(FILTER));
+
 		stepper_target = 200;
 		status = WAIT_FOR_TIME;
 		nextTime = nextTime + 100; // ensure no timer drift by incremeting the target
 		// After 1000 ms, come back to this state
-		nextStatus = StartPath; //StartPath
+		nextStatus = Pathfinding; //Pathfinding
 		//motor1->setVelocityDegreesPerSecond(30);
 		//Serial.println(motor1->getAngleDegrees());
 		//Serial.println(motor2->getAngleDegrees());
@@ -191,6 +200,9 @@ void StudentsRobot::updateStateMachine() {
 		break;
 	case Pathfinding:
 		PathfindingStateMachine(Pathfinding, Halting);
+		break;
+	case SavingRobbin:
+		DeployEscape(SavingRobbin, Pathfinding, robbinSide);
 		break;
 	case WAIT_FOR_TIME:
 		// Check to see if enough time has elapsed
@@ -254,6 +266,8 @@ void StudentsRobot::updateStateMachine() {
 		 }
 		 status = SCAN_MIDDLE;*/
 		nextStatus = SCAN_MIDDLE;
+		lcd->setCursor(2, 0);
+		lcd->print("L: 0, M: 9");
 
 		distance = readUltrasonic();
 		Serial.println(distance);
@@ -263,15 +277,23 @@ void StudentsRobot::updateStateMachine() {
 			adjacencies[adj] = 1;
 			IR_SERVO.write(15);
 			nextStatus = SCAN_LEFT_IR;
+
+			lcd->setCursor(2, 0);
+			lcd->print("L: 1, ");
 		}
 
 		UltraSonicServo.write(90);
-		nextTime = millis() + 500;
+		nextTime = millis() + 750;
 		status = WAIT_FOR_TIME;
 		break;
 	case SCAN_MIDDLE:
+		lcd->setCursor(2, 6);
+		lcd->print("M: 0, ");
+
 		if (!path.front()->nodes[cardinalDirection]->street) {
 			adjacencies[cardinalDirection] = 1;
+			lcd->setCursor(2, 6);
+			lcd->print("M: 2, ");
 		}
 
 		distance = readUltrasonic();
@@ -280,8 +302,11 @@ void StudentsRobot::updateStateMachine() {
 			Serial.print("road block middle");
 			int adj = cardinalDirection;
 			adjacencies[adj] = 1;
+
+			lcd->setCursor(2, 6);
+			lcd->print("M: 1, ");
 		}
-		nextTime = millis() + 500;
+		nextTime = millis() + 750;
 		UltraSonicServo.write(180);
 		status = WAIT_FOR_TIME;
 		nextStatus = SCAN_RIGHT;
@@ -293,6 +318,9 @@ void StudentsRobot::updateStateMachine() {
 		 status = nextStatus;*/
 		status = Pathfinding;
 
+		lcd->setCursor(2, 12);
+		lcd->print("R: 0");
+
 		distance = readUltrasonic();
 		Serial.println(distance);
 		if (distance > 20 && distance < 35) {
@@ -302,7 +330,10 @@ void StudentsRobot::updateStateMachine() {
 			IR_SERVO.write(170);
 			nextStatus = SCAN_RIGHT_IR;
 			status = WAIT_FOR_TIME;
-			nextTime = millis() + 500;
+			nextTime = millis() + 750;
+
+			lcd->setCursor(2, 12);
+			lcd->print("R: 1");
 		}
 
 		UltraSonicServo.write(0);
@@ -310,8 +341,14 @@ void StudentsRobot::updateStateMachine() {
 	case SCAN_LEFT_IR:
 		if (readIRDetector()) {
 			//TODO path back home
+			lcd->setCursor(3, 0);
+			lcd->print("FOUND BACON!");
+			robbinSide = 1;
+			status = SavingRobbin;
+			foundRobbin = true;
+			break;
 		}
-		nextTime = millis() + 500;
+		nextTime = millis() + 750;
 		UltraSonicServo.write(90);
 		status = WAIT_FOR_TIME;
 		nextStatus = SCAN_MIDDLE;
@@ -319,9 +356,16 @@ void StudentsRobot::updateStateMachine() {
 	case SCAN_RIGHT_IR:
 		if (readIRDetector()) {
 			//TODO path back home
+			lcd->setCursor(3, 0);
+			lcd->print("FOUND BACON!");
+			robbinSide = -1;
+			status = SavingRobbin;
+			foundRobbin = true;
+			break;
 		}
 		status = Pathfinding;
 		break;
+
 	case Halting:
 		// save state and enter safe mode
 		Serial.println("Halting State machine");
@@ -380,6 +424,45 @@ void StudentsRobot::InitialDrive(RobotStateMachine currentState,
 	}
 }
 
+void StudentsRobot::DeployEscape(RobotStateMachine currentState,
+		RobotStateMachine nextState, int dir) {
+	static int escape_state = 0;
+	switch (escape_state) {
+	case 0:
+		degrees += 90 * dir;
+		targetDist = chassis->distanceToWheelAngle(90);
+		status = WAIT_FOR_TURN;
+		nextStatus = currentState;
+		escape_state = 1;
+		break;
+	case 1:
+		velocity = -200;
+		targetDist = chassis->distanceToWheelAngle(50);
+		status = WAIT_FOR_DISTANCE;
+		nextStatus = currentState;
+		escape_state = 2;
+		break;
+	case 2:
+		velocity = 200;
+		targetDist = chassis->distanceToWheelAngle(50);
+		status = WAIT_FOR_DISTANCE;
+		nextStatus = currentState;
+		escape_state = 3;
+		break;
+	case 3:
+		degrees += -90 * dir;
+		targetDist = chassis->distanceToWheelAngle(90);
+		status = WAIT_FOR_TURN;
+		nextStatus = nextState;
+		escape_state = 0;
+
+		path = pathfinder->pathfind(path.front(), pathfinder->getNode(0, 0));
+		foundRobbin = true;
+		break;
+	}
+
+}
+
 void StudentsRobot::PathfindingStateMachine(RobotStateMachine currentState,
 		RobotStateMachine nextState) {
 	static int path_state = 0;
@@ -391,6 +474,7 @@ void StudentsRobot::PathfindingStateMachine(RobotStateMachine currentState,
 			current = path.front();
 			path.pop_front();
 			degrees += determineNextTurn(current, path.front());
+			printNodes(current, path.front());
 			path.push_front(current);
 
 			status = WAIT_FOR_TURN;
@@ -465,6 +549,9 @@ int StudentsRobot::readUltrasonic() {
 
 bool StudentsRobot::readIRDetector() {
 	//TODO actually read IR Detector
+	if (analogRead(FILTER) > 500) {
+		return true;
+	}
 	return false;
 }
 
@@ -497,7 +584,7 @@ int StudentsRobot::interpretAdjData() {
 					return 0;
 				}
 
-			} else if (adj->buildingLot) { //TODO get rid of building
+			} else if (adj->buildingLot && !foundRobbin) { //TODO get rid of building
 				Serial.println("pathfinding around building");
 
 				adj->buildingLot = false;
@@ -511,4 +598,33 @@ int StudentsRobot::interpretAdjData() {
 		}
 	}
 	return 3;
+}
+
+void StudentsRobot::printNodes(Node* current, Node* next) {
+	lcd->setCursor(0, 0);
+	lcd->print("C:(");
+
+	lcd->setCursor(3, 0);
+	lcd->print(current->xPos);
+
+	lcd->setCursor(4, 0);
+	lcd->print(",");
+
+	lcd->setCursor(5, 0);
+	lcd->print(current->yPos);
+
+	lcd->setCursor(6, 0);
+	lcd->print(")  N:(");
+
+	lcd->setCursor(12, 0);
+	lcd->print(next->xPos);
+
+	lcd->setCursor(13, 0);
+	lcd->print(",");
+
+	lcd->setCursor(14, 0);
+	lcd->print(next->yPos);
+
+	lcd->setCursor(15, 0);
+	lcd->print(")");
 }

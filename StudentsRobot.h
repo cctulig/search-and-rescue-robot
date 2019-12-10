@@ -14,6 +14,8 @@
 #include "src/pid/HBridgeEncoderPIDMotor.h"
 #include "src/pid/ServoAnalogPIDMotor.h"
 #include <ESP32Servo.h>
+#include <LiquidCrystal_I2C.h>
+#include <Wire.h>
 
 #include "DrivingChassis.h"
 #include "src/commands/IRCamSimplePacketComsServer.h"
@@ -31,6 +33,7 @@ enum RobotStateMachine {
 	Running,
 	StartPath,
 	Pathfinding,
+	SavingRobbin,
 	Halting,
 	Halt,
 	WAIT_FOR_STEPPER,
@@ -95,10 +98,13 @@ private:
 	Servo IR_SERVO;
 	Servo UltraSonicServo;
 	int adjacencies[4];
+	int robbinSide = 1;
 
 	bool stepped = true;
 	int stepper_target = 0;
 	int stepper_counter = 0;
+	LiquidCrystal_I2C *lcd;
+	bool foundRobbin = false;
 
 
 public:
@@ -148,6 +154,9 @@ public:
 	bool readIRDetector();
 	void InitialDrive(RobotStateMachine currentState,
 			RobotStateMachine nextState);
+	void printNodes(Node* current, Node* next);
+	void DeployEscape(RobotStateMachine currentState,
+			RobotStateMachine nextState, int dir);
 };
 
 #endif /* STUDENTSROBOT_H_ */

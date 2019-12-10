@@ -69,8 +69,9 @@
 
 // Sensor Pins
 #define US_TRIG_PIN				14 //TRIG
-#define ANALOG_SENSE_THREE		36
 #define US_ECHO_PIN				27 //ECHO
+#define FILTER	36
+
 //39 is also a possible pin.
 
 // Pins used by a perpheral, may be re-used
