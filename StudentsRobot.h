@@ -75,7 +75,7 @@ class StudentsRobot {
 private:
 	PIDMotor * motor1;
 	PIDMotor * motor2;
-	PIDMotor * motor3;
+	//PIDMotor * motor3;
 	Servo * servo;
 	float lsensorVal = 0;
 	float rsensorVal = 0;
@@ -88,7 +88,9 @@ private:
 	Pathfinder * pathfinder;
 
 	list<Node*> path;
+	list<Node*> priotity_locations;
 	list<Node*> visited_path;
+
 	float targetDist;
 	float radius = 28.2; //27.4 mm
 	float track = 251.5; //227 mm
@@ -105,6 +107,10 @@ private:
 	int stepper_counter = 0;
 	LiquidCrystal_I2C *lcd;
 	bool foundRobbin = false;
+	bool addStart = false;
+
+	int middle_counter = 0;
+	bool spaghetti = false;
 
 
 public:
@@ -157,6 +163,8 @@ public:
 	void printNodes(Node* current, Node* next);
 	void DeployEscape(RobotStateMachine currentState,
 			RobotStateMachine nextState, int dir);
+	void addPriorityNodes(list<Node*> queue);
+	void printStreet(Node* current, Node* building);
 };
 
 #endif /* STUDENTSROBOT_H_ */

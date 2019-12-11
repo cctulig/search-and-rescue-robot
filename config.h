@@ -47,11 +47,11 @@
 /**
  * Drive motor 3 10Khz full duty PWM pin
  */
-#define MOTOR3_PWM 12
+//#define MOTOR3_PWM 12
 /**
  * Pin for setting the direction of the H-Bridge
  */
-#define MOTOR3_DIR 26
+//#define MOTOR3_DIR 26
 
 //Encoder pins
 #define MOTOR1_ENCA 19
@@ -60,8 +60,8 @@
 #define MOTOR2_ENCA 17
 #define MOTOR2_ENCB 16
 
-#define MOTOR3_ENCB 25
-#define MOTOR3_ENCA 14
+//define MOTOR3_ENCB 25
+//#define MOTOR3_ENCA 14
 
 //Stepper
 #define STEPPER_DIRECTION 33
@@ -80,7 +80,7 @@
 #define I2C_SCL       			22
 #define SERIAL_PROGRAMMING_TX 	1
 #define SERIAL_PROGRAMMING_RX 	3
-#define WII_CONTROLLER_DETECT 	27
+//#define WII_CONTROLLER_DETECT 	27
 
 
 #endif /* SRC_CONFIG_H_ */

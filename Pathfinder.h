@@ -32,8 +32,11 @@ public:
 	void addBuildingsAndRoadBlock();
 	list<Node*> generateInitialPath();
 	list<Node*> addBuildingSearch(list<Node*> final_path, Node* building);
+	list<Node*> newAddBuildingSearch(Node* building);
 	list<Node*> pushListBack(list<Node*> orig, list<Node*> added);
 	Node* getNode(int x, int y);
+	list<Node*> priorityQueue();
+	int getAdjacentDirection(Node* current, Node* adj);
 };
 
 #endif /* PATHFINDER_H_ */

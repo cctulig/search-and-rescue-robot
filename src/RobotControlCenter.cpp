@@ -67,7 +67,7 @@ void RobotControlCenter::loop() {
 RobotControlCenter::RobotControlCenter(String * mn) {
 	pidList[0] = &motor1;
 	pidList[1] = &motor2;
-	pidList[2] = &motor3;
+	//pidList[2] = &motor3;
 	state = Startup;
 	name = mn;
 	robot = NULL;
@@ -88,11 +88,11 @@ void RobotControlCenter::setup() {
 
 	motor1.attach(MOTOR1_PWM, MOTOR1_DIR, MOTOR1_ENCA, MOTOR1_ENCB);
 	motor2.attach(MOTOR2_PWM, MOTOR2_DIR, MOTOR2_ENCA, MOTOR2_ENCB);
-	motor3.attach(MOTOR3_PWM, MOTOR3_DIR, MOTOR3_ENCA, MOTOR3_ENCB);
+	//motor3.attach(MOTOR3_PWM, MOTOR3_DIR, MOTOR3_ENCA, MOTOR3_ENCB);
 	// Set the setpoint the current position in motor units to ensure no motion
 	motor1.setSetpoint(motor1.getPosition());
 	motor2.setSetpoint(motor2.getPosition());
-	motor3.setSetpoint(motor3.getPosition());
+	//motor3.setSetpoint(motor3.getPosition());
 	// Set up digital servo for the gripper
 	servo.setPeriodHertz(50);
 	servo.attach(SERVO_PIN, 1000, 2000);

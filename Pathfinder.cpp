@@ -154,14 +154,13 @@ list<Node*> Pathfinder::pathFindTest(int startX, int startY, int endX,
 }
 
 void Pathfinder::addBuildingsAndRoadBlock() {
-	nodes[3][1].street = false;
-	nodes[3][1].roadBlock = true;
+	//nodes[3][1].street = false;
+	//nodes[3][1].roadBlock = true;
 
-	nodes[1][2].building = true;
-	nodes[1][4].building = true;
-	nodes[5][0].building = true;
+	//nodes[3][0].building = true;
+	//nodes[3][2].building = true;
+	//nodes[5][0].building = true;
 }
-
 
 list<Node*> Pathfinder::generateInitialPath() {
 	list<Node*> path;
@@ -185,8 +184,6 @@ list<Node*> Pathfinder::generateInitialPath() {
 	path.push_back(&nodes[0][2]);
 	path.push_back(&nodes[0][1]);
 	path.push_back(&nodes[0][0]);
-
-
 
 	return path;
 }
@@ -217,6 +214,19 @@ list<Node*> Pathfinder::addBuildingSearch(list<Node*> final_path,
 	return final_path;
 }
 
+list<Node*> Pathfinder::newAddBuildingSearch(Node* building) {
+	list<Node*> priority_nodes;
+
+	for (int i = 2; i < 6; i++) {
+		int pos = i % 4;
+		if (building->nodes[pos]->street) {
+			priority_nodes.push_back(building->nodes[pos]);
+		}
+	}
+
+	return priority_nodes;
+}
+
 list<Node*> Pathfinder::pushListBack(list<Node*> orig, list<Node*> added) {
 	added.pop_front();
 	int length = added.size();
@@ -229,6 +239,28 @@ list<Node*> Pathfinder::pushListBack(list<Node*> orig, list<Node*> added) {
 }
 
 Node* Pathfinder::getNode(int x, int y) {
-	return &nodes[x][x];
+	return &nodes[x][y];
 }
 
+list<Node*> Pathfinder::priorityQueue() {
+	list<Node*> path;
+
+	path.push_back(&nodes[1][1]);
+	path.push_back(&nodes[3][1]);
+	path.push_back(&nodes[4][0]);
+	path.push_back(&nodes[4][2]);
+	path.push_back(&nodes[5][3]);
+	path.push_back(&nodes[3][3]);
+	path.push_back(&nodes[1][3]);
+
+	return path;
+}
+
+int Pathfinder::getAdjacentDirection(Node* current, Node* adj) {
+	for(int i = 0; i < 4; i++) {
+		if(current->nodes[i] == adj) {
+			return i;
+		}
+	}
+	return 0;
+}

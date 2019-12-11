@@ -41,7 +41,7 @@ enum state_t {
 	Startup, WaitForConnect, run,readIMU, readIR
 // Add more states here and be sure to add them to the cycle
 };
-#define numberOfPID  3
+#define numberOfPID  2
 /**
  * RobotControlCenter is the main class for the 2000 level student code
  *
